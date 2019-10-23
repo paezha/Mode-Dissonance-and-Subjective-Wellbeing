@@ -1,0 +1,1538 @@
+---
+title: Do Drivers Dream of Walking? An Investigation of Dissonance in the Primary Mode of Travel from the Perspective of Subjective Wellbeing
+author:
+  - name: Beasly Bee
+    email: alice@university.com
+    affiliation: Some University
+    footnote: Corresponding Author
+  - name: Antsy Aardvark
+    email: aa@school.com
+    affiliation: Some School
+address:
+  - code: Some University
+    address: Department, Street, City, State, Zip
+  - code: Some School
+    address: Department, Street, City, State, Zip
+abstract: |
+  Transportation in most of the world has been dominated for decades by a fascination with the automobile. Increasingly, however, it is recognized that to achieve a variety of economic, environmental, and public health policy goals it is important to attract and retain users of public transport and active travel. A challenge with the way transportation policy is developed is that it tends to focus on cost-benefit and utilitarian considerations, which may miss other potential benefits of transportation. For this reason, subjective wellbeing (SWB) has been proposed as a way to enhance our understanding of the preferences and choices of travellers, as well as a way to evaluate the benefits of transportation beyond utilitarian considerations. The objective of this paper is to analyze the modes that people commonly use, and to what extent they are aligned (or not) with a variety of affective and utilitarian values. In other words, we are interested in the potential for dissonance with respect to the primary mode of travel, from the perspective of affective and utilitarian values. The study is based on data collected from a sample of travellers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name the mode or modes that they associated to affective values (freedom, enjoyment, and happiness) and to utilitarian values (safety, time waste, and efficiency). The results indicate that users of public transportation experience the most dissonance in terms of affective values, and active travellers the least. For those travellers who experience dissonance, active travel is the mode most commonly associated with affective values.
+  
+  To properly assess transportation policy This poses a number of challenges Broadening the commonly used transport project assessment will be relevant for achieving this goal. While satisfaction with travel has been mainly used in the context of daily trips and mainly under cost-benefit and utilitarian considerations, subjective wellbeing (SWB) over time has risen as an alternative for understanding the preferences and choices of transport users. The aim of this paper is to analyse the factors that can potentially affect the levels of SWB in the wide spectrum of public, private and active transport modes in the context of Santiago de Chile. The paper aims to reflect on the possibilities of increasing the SWB with a view to enhance the attractiveness of public transport and active travel. The paper investigates the affective and instrumental/utilitarian factors of SWB, according to modal choice. It uses an analysis of correspondence that considers the actual primary mode used, versus the mode that each individual associated to both utilitarian and affective SWB factors. The results show that there is more persistent modal dissonance between positive emotional and utilitarian associations within the more disadvantaged groups – particularly among users of public transport. The study shows that apart from time-savings and efficiency, security has also been cross-sectionally sensitive according to the data analysed. Factors such as happiness, enjoyment and freedom require far more attention in transport planning as they are strongly related to the dimensions of subjective and personal wellbeing. Targeting these factors will be relevant for attracting new users to public transportation and active travel.  
+
+journal: "An Elsevier journal"
+date: "`r Sys.Date()`"
+bibliography: mybibfile.bib
+#linenumbers: true
+#numbersections: true
+csl: elsevier-harvard.csl
+output: rticles::elsevier_article
+---
+
+<!-- This paper is an R markdown document that includes self-contained, reproducible analysis. To reproduce the paper the following files are needed:
+
+1. Dissonance_Santiago_v1.Rmd (this R markdown document)
+
+2. `Dissonance_Santiago.RData`. For reference: this data file was created using R notebook `00. Analysis of Dissonance Detailed.Rmd`. The initial analysis was done in the same R notebook. Neither of these two notebooks are needed for this document. 
+
+3. For compiling into a pdf in the style of an Elsevier document: elsarticle.cls, elsevier-harvard.csl, elsevier-harvard-without-titles.csl, elsevier-vancouver.csl, elsevier-without-titles.cls, elsevier-with-titles.csl, elsevier-with-titles-alphabetical.csl, mybibfile.bib
+-->
+
+
+```{r load-packages, include=FALSE}
+
+# Load packages used in this document
+
+library(readxl)
+library(tidyverse)
+library(rgdal)
+library(sf)
+library(ggmosaic)
+library(ggthemes)
+library(kableExtra)
+```
+
+```{r load-data, include=FALSE}
+
+# To run this notebook, the file `Dissonance_Santiago.RData` is needed. This file contains the following object:
+# 
+# master: a dataframe with information collected from 451 respondents. The variables in the dataframe are:
+# 
+# - NUMERO: Respondent ID
+# - USED: Main mode of transportation used by the respondent
+# - FREEDOM: Mode(s) that the respondent associates with feelings of freedom
+# - ENJOYMENT: Mode(s) that the respondent associates with feelings of enjoyment
+# - HAPPINESS: Mode(s) that the respondent associates with feelings of happiness
+# - POVERTY: Mode(s) that the respondent associates with feelings of poverty
+# - LUXURY: Mode(s) that the respondent associates with feelings of luxury
+# - STATUS: Mode(s) that the respondent associates with feelings of status
+# - SAFETY: Mode(s) that the respondent associates with feelings of safety
+# - TIME: Mode(s) that the respondent associates with feelings of WASTED TIME
+# - EFFICIENCY: Mode(s) that the respondent associates with feelings of efficiency
+# - AGE: Age of the respondent
+# - EDUCATION: Level of education of the respondent
+# - INCOME: Level of income of respondent
+# - TRAVEL_TIME: Trip duration of regular commuting trip 
+# - WEIGHT_*: A weight for the responses by ATTRIBUTE. Some respondents selected more than one mode that they associated with feelings of {FREEDOM, ENJOYMENT, HAPPINESS, SAFETY, TIME, and EFFICIENCY}. To avoid giving greater weight to respondents who indicated several modes of transportation, a weight was calculated that is the inverse of the number of modes indicated. These weights can be used to weight the frequencies prior to any analysis.
+# 
+# The modes of transportation (USED, FREEDOM, ENJOYMENT, HAPPINESS, SAFETY, TIME, EFFICIENCY) are coded as: 
+# "A": Auto
+# "B": Taxi
+# "C": Colectivo
+# "D": Moto
+# "E": Metro
+# "F": Bus
+# "G": Bicycle
+# "H": Walk
+#
+# AGE is coded as:
+#
+# "A": Less18
+# "B": 18to24
+# "C": 25to34
+# "D": 35to54
+# "E": 55to64
+# "F": 65more
+# 
+# EDUCATION is coded as:
+# 
+# "A": ELEMENTARY
+# "B": SECUNDARY
+# "C": PROFESS_TECH
+# "D": COLLEGE
+# "E": POSTGRAD
+#
+# INCOME is coded as (in pesos?):
+# 
+# "A": Less423
+# "B": 423to639
+# "C": 639to977
+# "D": 977to1550
+# "E": 1550to2380
+# "F": 2380more
+# 
+# TRAVEL_TIME is coded as:
+#
+# "A": 0-20 min
+# "B": 20-40 min
+# "C": 40-60 min
+# "D": 1h and more
+
+# Read the RData file:
+
+load("Dissonance_Santiago.RData")
+```
+
+```{r data-preparation, include=FALSE}
+
+# The master dataframe is processed for analysis. We plan to conduct two distinct types of analysis:
+#
+# 1. Analysis of dissonace using the characteristics of respondents (i.e., AGE, EDUCATION, INCOME, (Mode) USED, and TRAVEL_TIME) by ATTRIBUTE (i.e., FREEDOM et al.). In this case, dissonance is defined as follows:
+#
+# >> If the mode used is identical to the mode that the respondent associates with ATTRIBUTE (i.e. FREEDOM et al.), we consider that there is no dissonance; otherwise, we consider that there is dissonance. For example, if the respondent's main mode of transportation is Auto, and the respondent associates Auto with feelings of FREEDOM, then there is no dissonance. On the other hand, if the respondent's main mode of transportation is Auto, but associates Walking with feelings of FREEDOM, there is dissonance.
+# 
+# Given this, we will calculate how frequently there is dissonance at different levels of AGE, EDUCATION, INCOME, MODE, TRAVEL_TIME. Tests of independence can be implemented.
+#
+# 2. Analysis of dissonance using the mode USED and the mode respondents associated with ATTRIBUTE, then stratified by characteristics of respondents (i.e., AGE et al.) in this case, we see how frequently each mode was associated with ATTRIBUTE, given the main mode of transportation of the respondents.
+#
+# Here the dataframes are prepared to support these two types of analysis
+
+#################################################################################
+# Prepare a dataframe for the analysis of dissonance by attribute (Analysis 1.) #
+#################################################################################
+
+# First, select the variables needed from the master table, and code dissonance as 1 (no dissonance) or two (dissonance):
+
+Overall_dissonance <- master %>%
+  transmute(USED, 
+            FREEDOM_DISSONANCE = ifelse(USED == FREEDOM, 1, 2),
+            ENJOYMENT_DISSONANCE = ifelse(USED == ENJOYMENT, 1, 2),
+            HAPPINESS_DISSONANCE = ifelse(USED == HAPPINESS, 1, 2),
+            POVERTY_DISSONANCE = ifelse(USED == POVERTY, 1, 2),
+            LUXURY_DISSONANCE = ifelse(USED == LUXURY, 1, 2),
+            STATUS_DISSONANCE = ifelse(USED == STATUS, 1, 2),
+            SAFETY_DISSONANCE = ifelse(USED == SAFETY, 1, 2),
+            TIME_DISSONANCE = ifelse(USED == TIME, 1, 2),
+            EFFICIENCY_DISSONANCE = ifelse(USED == EFFICIENCY, 1, 2),
+            AGE,
+            EDUCATION,
+            INCOME,
+            TRAVEL_TIME)
+
+# Recode variables and convert to factors:
+
+Overall_dissonance <- Overall_dissonance %>%
+  mutate(USED = case_when(USED == "A" ~ "Auto",
+                                  USED == "B" | USED == "C" | USED == "D" ~ "Other",
+                                  USED == "E" | USED == "F" ~ "Public",
+                                  USED == "G" | USED == "H" ~ "Active"),
+         AGE = case_when(AGE == "A" | AGE == "B" | AGE == "C" ~ "< 35",
+                         AGE == "D" ~ "35 - 54",
+                         AGE == "E" | AGE == "F" ~ "> 54"),
+         EDUCATION = case_when(EDUCATION == "A" | EDUCATION == "B" ~ "K-12",
+                               EDUCATION == "C" | EDUCATION == "D" ~ "Tech/Univ",
+                               EDUCATION == "E" ~ "Graduate"),
+         INCOME = case_when(INCOME == "A" | INCOME == "B" ~ "Low",
+                            INCOME == "C" | INCOME == "D" ~ "Middle",
+                            INCOME == "E" | INCOME == "F" ~ "High"),
+         TRAVEL_TIME = case_when(TRAVEL_TIME == "A" ~ "< 20 min",
+                                 TRAVEL_TIME == "B" ~ "20 - 40 min",
+                                 TRAVEL_TIME == "C" ~ "40 - 60 min",
+                                 TRAVEL_TIME == "D" ~ "> 60 min")) %>%
+  mutate(USED = factor(USED, levels = c("Auto", "Active", "Public", "Other"), labels = c("Auto", "Active", "Public", "Other")),
+         FREEDOM_DISSONANCE = factor(FREEDOM_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         ENJOYMENT_DISSONANCE = factor(ENJOYMENT_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         HAPPINESS_DISSONANCE = factor(HAPPINESS_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         POVERTY_DISSONANCE = factor(POVERTY_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         LUXURY_DISSONANCE = factor(LUXURY_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         STATUS_DISSONANCE = factor(STATUS_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         SAFETY_DISSONANCE = factor(SAFETY_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         TIME_DISSONANCE = factor(TIME_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         EFFICIENCY_DISSONANCE = factor(EFFICIENCY_DISSONANCE, levels = c(1, 2), labels = c("No Dissonance", "Dissonance")),
+         AGE = factor(AGE, levels = c("< 35", "35 - 54", "> 54"), labels = c("< 35", "35 - 54", "> 54")),
+         EDUCATION = factor(EDUCATION, levels = c("K-12", "Tech/Univ", "Graduate"), labels = c("K-12", "Tech/Univ", "Graduate")),
+         INCOME = factor(INCOME, levels = c("Low", "Middle", "High"), labels = c("Low", "Middle", "High")),
+         TRAVEL_TIME = factor(TRAVEL_TIME, levels = c("< 20 min", "20 - 40 min", "40 - 60 min", "> 60 min"), labels = c("< 20 min", "20 - 40 min", "40 - 60 min", "> 60 min")))
+
+#############################################################################
+# Prepare a dataframe for the analysis of dissonance by modes (Analysis 2.) #
+#############################################################################
+
+# First, split the responses regarding the modes associated with each attribute, so that we can record each mode selected individually:
+
+Modes_by_Attribute <- master %>% 
+    mutate(FREEDOM = strsplit(as.character(FREEDOM), ""),
+           ENJOYMENT = strsplit(as.character(ENJOYMENT), ""),
+           HAPPINESS = strsplit(as.character(HAPPINESS), ""),
+           POVERTY = strsplit(as.character(POVERTY), ""),
+           LUXURY = strsplit(as.character(LUXURY), ""),
+           STATUS = strsplit(as.character(STATUS), ""),
+           SAFETY = strsplit(as.character(SAFETY), ""),
+           TIME = strsplit(as.character(TIME), ""),
+           EFFICIENCY = strsplit(as.character(EFFICIENCY), ""))
+
+# Here, we convert each of the responses into an individual row and stack the resulting dataframes, after adding the name of the attribute for identification:
+
+Modes_by_Attribute <- rbind(data.frame(Modes_by_Attribute %>% 
+                                         select(-c(ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY, 
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY, 
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>% 
+                                         rename(IDEAL = FREEDOM, WEIGHT = WEIGHT_FREEDOM) %>%
+                                         unnest(IDEAL),
+                                       ATTRIBUTE = "FREEDOM"),
+                            data.frame(Modes_by_Attribute %>%
+                                         select(-c(FREEDOM, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY, 
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY, 
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>% 
+                                         rename(IDEAL = ENJOYMENT, WEIGHT = WEIGHT_ENJOYMENT) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "ENJOYMENT"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY, 
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM,
+                                                   WEIGHT_ENJOYMENT,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY, 
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>% 
+                                         rename(IDEAL = HAPPINESS, WEIGHT = WEIGHT_HAPPINESS) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "HAPPINESS"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY,
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY,
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>%
+                                         rename(IDEAL = POVERTY, WEIGHT = WEIGHT_POVERTY) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "POVERTY"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   #LUXURY,
+                                                   STATUS,
+                                                   SAFETY,
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   #WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY,
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>%
+                                         rename(IDEAL = LUXURY, WEIGHT = WEIGHT_LUXURY) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "LUXURY"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   #STATUS,
+                                                   SAFETY,
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   #WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY,
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>%
+                                         rename(IDEAL = STATUS, WEIGHT = WEIGHT_STATUS) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "STATUS"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   TIME, 
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_TIME, 
+                                                   WEIGHT_EFFICIENCY)) %>%
+                                         rename(IDEAL = SAFETY, WEIGHT = WEIGHT_SAFETY) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "SAFETY"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY,
+                                                   EFFICIENCY,
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY,
+                                                   WEIGHT_EFFICIENCY)) %>%
+                                         rename(IDEAL = TIME, WEIGHT = WEIGHT_TIME) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "TIME"),
+                            data.frame(Modes_by_Attribute %>% 
+                                         select(-c(FREEDOM, 
+                                                   ENJOYMENT, 
+                                                   HAPPINESS,
+                                                   POVERTY,
+                                                   LUXURY,
+                                                   STATUS,
+                                                   SAFETY,
+                                                   TIME, 
+                                                   WEIGHT_FREEDOM, 
+                                                   WEIGHT_ENJOYMENT, 
+                                                   WEIGHT_HAPPINESS,
+                                                   WEIGHT_POVERTY,
+                                                   WEIGHT_LUXURY,
+                                                   WEIGHT_STATUS,
+                                                   WEIGHT_SAFETY,
+                                                   WEIGHT_TIME)) %>%
+                                         rename(IDEAL = EFFICIENCY, WEIGHT = WEIGHT_EFFICIENCY) %>%
+                                         unnest(IDEAL), 
+                                       ATTRIBUTE = "EFFICIENCY"))
+
+# There are some missing values. Drop all NAs:
+
+Modes_by_Attribute <- drop_na(Modes_by_Attribute)
+
+# We now recode the variables:
+
+Modes_by_Attribute <- Modes_by_Attribute %>%
+  mutate(USED = case_when(USED == "A" ~ "Auto",
+                                  USED == "B" | USED == "C" | USED == "D" ~ "Other",
+                                  USED == "E" | USED == "F" ~ "Public",
+                                  USED == "G" | USED == "H" ~ "Active"),
+         IDEAL = case_when(IDEAL == "A" ~ "Auto",
+                                  IDEAL == "B" | IDEAL == "C" | IDEAL == "D" ~ "Other",
+                                  IDEAL == "E" | IDEAL == "F" ~ "Public",
+                                  IDEAL == "G" | IDEAL == "H" ~ "Active"),
+         AGE = case_when(AGE == "A" | AGE == "B" | AGE == "C" ~ "< 35",
+                         AGE == "D" ~ "35 - 54",
+                         AGE == "E" | AGE == "F" ~ "> 54"),
+         EDUCATION = case_when(EDUCATION == "A" | EDUCATION == "B" ~ "K-12",
+                               EDUCATION == "C" | EDUCATION == "D" ~ "Tech/Univ",
+                               EDUCATION == "E" ~ "Graduate"),
+         INCOME = case_when(INCOME == "A" | INCOME == "B" ~ "Low",
+                            INCOME == "C" | INCOME == "D" ~ "Middle",
+                            INCOME == "E" | INCOME == "F" ~ "High"),
+         TRAVEL_TIME = case_when(TRAVEL_TIME == "A" ~ "< 20 min",
+                                 TRAVEL_TIME == "B" ~ "20 - 40 min",
+                                 TRAVEL_TIME == "C" ~ "40 - 60 min",
+                                 TRAVEL_TIME == "D" ~ "> 60 min"))
+
+# After recoding the , there will be some duplicate entries, because a person may have attributed, say, feelings of freedom to walking and cycling, so in the table this will appear as two instances of "Active". This is ok, because each is weighted appropriately.
+
+# Convert to factors:
+
+Modes_by_Attribute <- Modes_by_Attribute %>%
+  mutate(USED = factor(USED, levels = c("Auto", "Active", "Public", "Other"), labels = c("Auto", "Active", "Public", "Other")),
+         IDEAL = factor(IDEAL, levels = c("Auto", "Active", "Public", "Other"), labels = c("Auto", "Active", "Public", "Other")),
+         AGE = factor(AGE, levels = c("< 35", "35 - 54", "> 54"), labels = c("< 35", "35 - 54", "> 54")),
+         EDUCATION = factor(EDUCATION, levels = c("K-12", "Tech/Univ", "Graduate"), labels = c("K-12", "Tech/Univ", "Graduate")),
+         INCOME = factor(INCOME, levels = c("Low", "Middle", "High"), labels = c("Low", "Middle", "High")),
+         TRAVEL_TIME = factor(TRAVEL_TIME, levels = c("< 20 min", "20 - 40 min", "40 - 60 min", "> 60 min"), labels = c("< 20 min", "20 - 40 min", "40 - 60 min", "> 60 min")))
+```
+
+
+```{r cross-tabs-function, include=FALSE}
+
+## Define functions for crosstabs; these functions enhance the base crosstabs functions and make it easier to report cross tabulations in different ways.
+
+crosstab <- function (..., dec.places = NULL,
+                           type = NULL,
+                           style = "wide",
+                           row.vars = NULL,
+                           col.vars = NULL,
+                           percentages = TRUE, 
+                           addmargins = TRUE,
+                           subtotals=TRUE)
+
+###################################################################################
+#                                                                                 #
+# Function created by Dr Paul Williamson, Dept. of Geography and Planning,        #
+# School of Environmental Sciences, University of Liverpool, UK.                  #
+#                                                                                 #
+# Adapted from the function ctab() in the catspec packge.                         #
+#                                                                                 #
+# Version: 12th July 2013                                                         #
+#                                                                                 #
+# Output best viewed using the companion function print.crosstab()                #
+#                                                                                 #
+###################################################################################
+
+  
+  #Declare function used to convert frequency counts into relevant type of proportion or percentage
+  {mk.pcnt.tbl <- function(tbl, type) {
+        a <- length(row.vars)
+        b <- length(col.vars)
+        mrgn <- switch(type, column.pct = c(row.vars[-a], col.vars), 
+                            row.pct = c(row.vars, col.vars[-b]),
+                            joint.pct = c(row.vars[-a], col.vars[-b]),
+                            total.pct = NULL)
+        tbl <- prop.table(tbl, mrgn)
+        if (percentages) {
+            tbl <- tbl * 100
+        }
+        tbl
+    }
+        
+    #Find no. of vars (all; row; col) for use in subsequent code
+    n.row.vars <- length(row.vars)
+    n.col.vars <- length(col.vars)
+    n.vars <- n.row.vars + n.col.vars
+    
+
+    #Check to make sure all user-supplied arguments have valid values
+    stopifnot(as.integer(dec.places) == dec.places, dec.places > -1)
+    #type: see next section of code
+    stopifnot(is.character(style))    
+    stopifnot(is.logical(percentages))
+    stopifnot(is.logical(addmargins))
+    stopifnot(is.logical(subtotals))
+    stopifnot(n.vars>=1)
+
+    #Convert supplied table type(s) into full text string (e.g. "f" becomes "frequency")
+    #If invalid type supplied, failed match gives user automatic error message
+    types <- NULL
+    choices <- c("frequency", "row.pct", "column.pct", "joint.pct", "total.pct")
+    for (tp in type) types <- c(types, match.arg(tp, choices))
+    type <- types
+  
+    #If no type supplied, default to 'frequency + total' for univariate tables and to
+    #'frequency' for multi-dimenstional tables
+
+    #For univariate table....
+    if (n.vars == 1) {
+      if (is.null(type)) {
+        # default = freq count + total.pct  
+        type <- c("frequency", "total.pct")
+        #row.vars <- 1
+      } else {
+        #and any requests for row / col / joint.pct must be changed into requests for 'total.pct'
+        type <- ifelse(type == "frequency", "frequency", "total.pct")
+      }
+    #For multivariate tables...
+    } else if (is.null(type)) {
+      # default = frequency count  
+      type <- "frequency"
+    }
+    
+      
+    
+    #Check for integrity of requested analysis and adjust values of function arguments as required
+    
+    if ((addmargins==FALSE) & (subtotals==FALSE)) {
+      warning("WARNING: Request to suppress subtotals (subtotals=FALSE) ignored because no margins requested (addmargins=FALSE)")
+      subtotals <- TRUE
+    }
+          
+    if ((n.vars>1) & (length(type)>1) & (addmargins==TRUE)) {
+      warning("WARNING: Only row totals added when more than one table type requested")
+      #Code lower down selecting type of margin implements this...
+    }
+
+    if ((length(type)>1) & (subtotals==FALSE)) { 
+      warning("WARNING: Can only request supply one table type if requesting suppression of subtotals; suppression of subtotals not executed")
+      subtotals <- TRUE
+    }
+    
+    if ((length(type)==1) & (subtotals==FALSE)) {
+      choices <- c("frequency", "row.pct", "column.pct", "joint.pct", "total.pct")
+      tp <- match.arg(type, choices)
+      if (tp %in% c("row.pct","column.pct","joint.pct")) {
+          warning("WARNING: subtotals can only be suppressed for tables of type 'frequency' or 'total.pct'")
+          subtotals<- TRUE
+         }
+    }
+    
+    if ((n.vars > 2) & (n.col.vars>1) & (subtotals==FALSE)) 
+      warning("WARNING: suppression of subtotals assumes only 1 col var; table flattened accordingly")
+    
+    
+    if ( (subtotals==FALSE) & (n.vars>2) )  {
+    #If subtotals not required AND total table vars > 2
+    #Reassign all but last col.var as row vars
+    #[because, for simplicity, crosstabs assumes removal of subtotals uses tables with only ONE col var]
+    #N.B. Subtotals only present in tables with > 2 cross-classified vars...
+      if (length(col.vars)>1) {
+        row.vars <- c(row.vars,col.vars[-length(col.vars)])
+        col.vars <- col.vars[length(col.vars)]
+        n.row.vars <- length(row.vars)
+        n.col.vars <- 1
+      }
+    }
+    
+    #If dec.places not set by user, set to 2 unlesss only one table of type frequency requested,
+    #in which case set to 0.  [Leaves user with possibility of having frequency tables with > 0 dp]
+    if (is.null(dec.places)) {
+      if ((length(type)==1) & (type[1]=="frequency")) {
+        dec.places <- 0
+      } else {
+        dec.places <-2
+      }
+    }
+ 
+    #Take the original input data, whatever form originally supplied in,
+    #convert into table format using requested row and col vars, and save as 'tbl'
+
+    args <- list(...)    
+    
+    if (length(args) > 1) {
+        if (!all(sapply(args, is.factor))) 
+            stop("If more than one argument is passed then all must be factors")
+        tbl <- table(...)
+    }
+    else {
+        if (is.factor(...)) {
+            tbl <- table(...)
+        }
+        else if (is.table(...)) {
+            tbl <- eval(...)
+        }
+        else if (is.data.frame(...)) {
+            #tbl <- table(...)
+            if (is.null(row.vars) && is.null(col.vars)) {
+              tbl <- table(...)
+            }
+            else {
+              var.names <- c(row.vars,col.vars)
+              A <- (...)
+              tbl <- table(A[var.names])
+              if(length(var.names==1)) names(dimnames(tbl)) <- var.names
+              #[table() only autocompletes dimnames for multivariate crosstabs of dataframes]
+            }
+        }
+        else if (class(...) == "ftable") {
+            tbl <- eval(...)
+            if (is.null(row.vars) && is.null(col.vars)) {
+                row.vars <- names(attr(tbl, "row.vars"))
+                col.vars <- names(attr(tbl, "col.vars"))
+            }
+            tbl <- as.table(tbl)
+        }
+        else if (class(...) == "ctab") {
+            tbl <- eval(...)
+            if (is.null(row.vars) && is.null(col.vars)) {
+                row.vars <- tbl$row.vars
+                col.vars <- tbl$col.vars
+            }
+            for (opt in c("dec.places", "type", "style", "percentages", 
+                "addmargins", "subtotals")) if (is.null(get(opt))) 
+                assign(opt, eval(parse(text = paste("tbl$", opt, 
+                  sep = ""))))
+            tbl <- tbl$table
+        }
+        else {
+            stop("first argument must be either factors or a table object")
+        }
+    }
+    
+    #Convert supplied table style into full text string (e.g. "l" becomes "long")
+    style <- match.arg(style, c("long", "wide"))
+
+    #Extract row and col names to be used in creating 'tbl' from supplied input data
+    nms <- names(dimnames(tbl))
+    z <- length(nms)
+    if (!is.null(row.vars) && !is.numeric(row.vars)) {
+        row.vars <- order(match(nms, row.vars), na.last = NA)
+    }
+    if (!is.null(col.vars) && !is.numeric(col.vars)) {
+        col.vars <- order(match(nms, col.vars), na.last = NA)
+    }
+    if (!is.null(row.vars) && is.null(col.vars)) {
+        col.vars <- (1:z)[-row.vars]
+    }
+    if (!is.null(col.vars) && is.null(row.vars)) {
+        row.vars <- (1:z)[-col.vars]
+    }
+    if (is.null(row.vars) && is.null(col.vars)) {
+        col.vars <- z
+        row.vars <- (1:z)[-col.vars]
+    }
+    
+    #Take the original input data, converted into table format using supplied row and col vars (tbl)
+    #and create a second version (crosstab) which stores results as percentages if a percentage table type is requested.
+    if (type[1] == "frequency") 
+      crosstab <- tbl
+    else 
+      crosstab <- mk.pcnt.tbl(tbl, type[1])
+
+    
+    #If multiple table types requested, create and add these to 
+    if (length(type) > 1) {
+      tbldat <- as.data.frame.table(crosstab)
+      z <- length(names(tbldat)) + 1
+      tbldat[z] <- 1
+      pcntlab <- type
+      pcntlab[match("frequency", type)] <- "Count"
+      pcntlab[match("row.pct", type)] <- "Row %"
+      pcntlab[match("column.pct", type)] <- "Column %"
+      pcntlab[match("joint.pct", type)] <- "Joint %"
+      pcntlab[match("total.pct", type)] <- "Total %"
+      for (i in 2:length(type)) {
+          if (type[i] == "frequency") 
+              crosstab <- tbl
+          else crosstab <- mk.pcnt.tbl(tbl, type[i])
+          crosstab <- as.data.frame.table(crosstab)
+          crosstab[z] <- i
+          tbldat <- rbind(tbldat, crosstab)
+      }
+      tbldat[[z]] <- as.factor(tbldat[[z]])
+      levels(tbldat[[z]]) <- pcntlab
+      crosstab <- xtabs(Freq ~ ., data = tbldat)
+      names(dimnames(crosstab))[z - 1] <- ""
+    }
+    
+        
+    #Add margins if required, adding only those margins appropriate to user request
+    if (addmargins==TRUE) {
+
+      vars <- c(row.vars,col.vars)
+      
+      if (length(type)==1) {
+      if (type=="row.pct") 
+        { crosstab <- addmargins(crosstab,margin=c(vars[n.vars]))
+          tbl <- addmargins(tbl,margin=c(vars[n.vars]))
+        }
+      else 
+        { if (type=="column.pct") 
+            { crosstab <- addmargins(crosstab,margin=c(vars[n.row.vars]))
+              tbl <- addmargins(tbl,margin=c(vars[n.row.vars]))
+            }
+          else 
+            { if (type=="joint.pct") 
+              { crosstab <- addmargins(crosstab,margin=c(vars[(n.row.vars)],vars[n.vars])) 
+                tbl <- addmargins(tbl,margin=c(vars[(n.row.vars)],vars[n.vars])) 
+              }
+              else #must be total.pct OR frequency
+                { crosstab <- addmargins(crosstab)
+                  tbl <- addmargins(tbl)
+                }
+            }
+  	     } 
+      }
+      
+      #If more than one table type requested, only adding row totals makes any sense...
+      if (length(type)>1) {
+        crosstab <- addmargins(crosstab,margin=c(vars[n.vars]))
+        tbl <- addmargins(tbl,margin=c(vars[n.vars]))
+      }
+      
+    }  
+    
+    
+    #If subtotals not required, and total vars > 2, create dataframe version of table, with relevent
+    #subtotal rows / cols dropped [Subtotals only present in tables with > 2 cross-classified vars]
+    t1 <- NULL
+    if ( (subtotals==FALSE) & (n.vars>2) )  {
+    
+    #Create version of crosstab in ftable format
+    t1 <- crosstab 
+    t1 <- ftable(t1,row.vars=row.vars,col.vars=col.vars)
+
+    #Convert to a dataframe
+    t1 <- as.data.frame(format(t1),stringsAsFactors=FALSE)
+
+    #Remove backslashes from category names AND colnames
+    t1 <- apply(t1[,],2, function(x) gsub("\"","",x))
+    #Remove preceding and trailing spaces from category names to enable accurate capture of 'sum' rows/cols
+    #[Use of grep might extrac category labels with 'sum' as part of a longer one or two word string...]
+    t1 <- apply(t1,2,function(x) gsub("[[:space:]]*$","",gsub("^[[:space:]]*","",x)))
+
+    #Reshape dataframe to that variable and category labels display as required
+    #(a) Move col category names down one row; and move col variable name one column to right
+    t1[2,(n.row.vars+1):ncol(t1)] <- t1[1,(n.row.vars+1):ncol(t1)]
+    t1[1,] <- ""
+    t1[1,(n.row.vars+2)] <- t1[2,(n.row.vars+1)]    
+    #(b) Drop the now redundant column separating the row.var labels from the table data + col.var labels
+    t1 <- t1[,-(n.row.vars+1)]
+    
+    #In 'lab', assign category labels for each variable to all rows (to allow identification of sub-totals) 
+    lab <- t1[,1:n.row.vars]
+    for (c in 1:n.row.vars) {
+      for (r in 2:nrow(lab)) {
+        if (lab[r,c]=="") lab[r,c] <- lab[r-1,c]  
+      }
+    }
+
+    lab <- (apply(lab[,1:n.row.vars],2,function(x) x=="Sum"))
+    lab <- apply(lab,1,sum)
+    #Filter out rows of dataframe containing subtotals
+    
+    t1 <- t1[((lab==0) | (lab==n.row.vars)),]
+
+    #Move the 'Sum' label associated with last row to the first column; in the process
+    #setting the final row labels associated with other row variables to ""
+    t1[nrow(t1),1] <- "Sum"
+    t1[nrow(t1),(2:n.row.vars)] <- ""
+    
+    #set row and column names to NULL
+    rownames(t1) <- NULL
+    colnames(t1) <- NULL
+
+    }
+    
+    
+    
+    #Create output object 'result' [class: crosstab]
+    result <- NULL
+    #(a) record of argument values used to produce tabular output
+    result$row.vars <- row.vars
+    result$col.vars <- col.vars
+    result$dec.places <- dec.places
+    result$type <- type
+    result$style <- style
+    result$percentages <- percentages
+    result$addmargins <- addmargins
+    result$subtotals <- subtotals
+    
+    #(b) tabular output [3 variants]
+    result$table <- tbl  #Stores original cross-tab frequency counts without margins [class: table]
+    result$crosstab <- crosstab #Stores cross-tab in table format using requested style(frequency/pct) and table margins (on/off)
+                                #[class: table]  
+    result$crosstab.nosub <- t1  #crosstab with subtotals suppressed [class: dataframe; or NULL if no subtotals suppressed]  
+    class(result) <- "crosstab"    
+
+    #Return 'result' as output of function
+    result
+}
+```
+
+Introduction
+==========================
+
+Transportation planning for decades has focused on providing mobility for the private automobile. This is a model of development that was initially introduced in North America as a solution to urbanizations problems, and that was eventually copied elsewhere (Brown et al., 2009; Angotti, 1996) . Despite the initial promise of automotive technology, it is now evident that mobility centred on the private automobile has given rise to a litany of maladies that are in urgent need of correction. This includes environmental concerns (i.e., climate change; Chapman, 2007) as well as other social (Boschmann and Kwan, 2008), health (Khreis et al., 2016), and equity issues (Bocarejo and Oviedo, 2012). 
+As the real impacts of our societal dependence on the private autombobile have become increasingly evident, the transportation agenda has in recent years aimed to shift focus to the reduction of car-use and towards the creation of mobility polycultures that offer a broader menu of transportation alternatives than just the private automobile (Miller, 2011) . In order to successfully achieve this goal, it is essential not only to provide the services and facilities that support public transportation and active travel, but also to attract new users to these modes of transportation (Ettema et al. 2011). Within this context, it has been argued that sustainable transportation policies require all participants in the transportation system to challenge what Gossling and Cohen (2014) term “transportation taboos”: deep-seated ideas concerning the contribution to emissions by individuals, the inequality of market-based approaches, and the social and psychological functions of transportation. With respect to the latter, moving beyond a purely utilitarian focus, it is important to understand how users perceive affective and instrumental elements on their transportation experience, since this can help to incorporate adequate improvements in alternative transportation, including transit and active modes, to make them more attractive to users (Anable and Gatersleben, 2005; Domarchi et al., 2008; Gatersleben and Uzzell, 2007; Steg 2005 ). 
+
+A useful lens to investigate the social and psychological functions of transportation is by means of the concept of subjective wellbeing (SWB. See, inter alia, De Vos et al., 2013 and Chatterjee et al., 2019) . SWB is defined by the OECD as “[g]ood mental states, including all of the various evaluations, positive and negative, that people make of their lives, and the affective reactions of people to their experiences” (OECD, 2013, p. 10).  Accordingly, the aim of this paper is to analyse some of the factors that can potentially affect the levels of SWB in the wide spectrum of public, private and active transport modes in the context of Santiago de Chile. Previous research suggests that public transport users experience a negative gap in desired and actual travel time, whereas active travellers don’t seem to mind somewhat longer trips than what strictly needed (e.g., Páez and Whalen, 2010). In the context of a Latin American country, historically the poor travel experience of public transit users and active travellers reflects the social inequalities of social groups that have no alternative but to move in these types of modes while living far from the work centres and main activities. The paper aims to reflect on the possibilities of increasing the SWB while travelling, and how this could increase the attractiveness of public transport and active travel in the socio-demographic groups studied. This can help not only to reduce the use of private transport but also decrease the inequality gap between these users.
+
+The paper explores how positive affective and instrumental/utilitarian factors of SWB correspond to the use of the primary mode of transportation. It uses an analysis of correspondence that considers the actual primary mode versus the mode that individuals associated to both utilitarian (designed to be useful or practical rather than attractive) and affective (expressing a person's feelings) SWB factors. For example, it will be analysed if a person who uses public transport as the primary mode, tends to associate these modes with positive affective factors (as freedom, enjoyment or happiness) or positive utilitarian factors (as security, time-savings or efficiency). We hypothesize that there is a more persistent non-correspondence or mismatch within the more disadvantage groups or within the users of public transport.
+
+The paper contributes to the literature in three areas. First, it contributes to an emerging literature on the topic in the context of the Global South (Bejarano et al., 2017 ; Shao and Liang, 2019 ; Van et al., 2014 ; Zorrilla et al., 2019);  to the best of our knowledge, the case of Chile has not yet been reported. Second, although there is literature on the enjoyment of commute and other emotional factors, from a hedonic and even eudaimonic perspectives, the analysis has yet to be applied more fully in terms of distributional issues – i.e. which groups are mostly disadvantaged. Finally, the analysis shows the attitudes of people towards their primary mode and their perception towards ‘ideal modes’ – implying their preferences, even in situations when their ideal mode is not part of their actual choice set. The attitudes of travellers towards transport modes are critical factors to be considered by policy-makers in case they want to promote and increase the use of public transport or active modes (e.g., Bejarano et al., 2019). The paper explores these positive and negative associations within the transport options used in Santiago.
+
+Background
+============
+
+The transportation community has for the most part already agreed to the need of looking at mobility and transport issues from the lens of wellbeing, to broaden the commonly used utilitarian perspective to evaluate projects. Users’ travel satisfaction (Bergstad, 2001) has been the primary way to direct this challenge towards everyday mobility, resulting on research about satisfaction with different transport modes. For example, numerous studies report that car users have a higher level of satisfaction compared to other transport modes (Redmond and Mokhtarian, 2001 ; Bergstad et al. 2011; Eriksson et al. 2013; Whalen et al., 2013). In a similar way, there are multiple reports that active travel also tends to yield high levels of satisfaction (Smith, 2017; St-Louis et al. 2014; Paez and Whalen, 2010; Whalen et al., 2013), In contrast, public transport users tend to assess their experience more negatively (De Vos et al. 2016; Abenoza et al. 2017; Ettema et al. 2012; Páez and Whalen, 2010). Multi-modal trips also influence satisfaction levels; for instance, when an individual chooses a particular mode of transportation, she will report a higher level of satisfaction with that chosen mode – perhaps as a form of post hoc validation (Susilo and Cats, 2014). 
+
+While the use of travel satisfaction has been mainly used in the context of daily trips – typically been linked to cost-benefit and utilitarian measurements –, the evaluation of Subjective Wellbeing (SWB) over time has risen as an alternative measure. In the field of travel behaviour, Ettema et al. (2010; p. 725) have defined SWB as the degree to which an individual positively evaluates the overall quality of their lives, where the general life satisfaction encompasses a more extended temporality – which implies assuming a tendency to be more stable over time. This concept has prompted a growing literature that complements and applies SWB in a broader range of satisfaction scales and situations. The definition of other factors such as travel choice mode, attitudes and external elements of the built environment has been studied for a broader understanding of the changes produced in the SWB. As these factors do not necessarily apply to the general life satisfaction on the long term, the studies have aimed to determine both the direct and indirect effects on the perception of users (see, e.g. Ye and Titheridge 2017). Other concepts have also emerged as the Satisfaction with Travel Scale (STS), a measurement devised by Ettema et al. (2011) as well as different scales based on people’s travel perceptions. De Vos et al. (2015) for instance, explore in detail the underlying dimensions of the affective domain of STS in which SWB is based (for more on STS see also Friman et al. 2013).
+
+Recent literature on SWB and its link with transport have demonstrated a relationship between people’s perceptions and satisfaction with their daily travel (Smith, 2017; St-Louis et al. 2014; Paez and Whalen, 2010; Whalen et al., 2013). Scholars have shown that accessibility has been the most developed factor that influences people’s wellbeing (Delbosc, 2012), and activities have a direct impact on travel satisfaction (Bergstad et al., 2010). Delbosc (2012; 28) for instance, has summarised the most significant influences on psychological wellbeing: poverty and employment, meaningful relationships and health. However, understanding the components affecting people’s perceptions implies the differentiation between the emotional (also named as symbolic-affective) and the instrumental reasons (Bergstad, 2001). Steg et al. (2011) have compared symbolic-affective opposed to instrumental-reasoned motives based on car-use, and other studies have also found associations between affective and symbolic aspects of car-use (see, e.g. Gatersleben, 2007; Lois & López-Sáez, 2009). Previous studies have demonstrated how socio-demographic factors affect the levels of SWB. The effect of income on SWB (Clarck and Oswald, 1996, Ferrer-i-Carbonell, 2005); education and unemployment (Argyle, 1999); age (Diener and Suh, 1997) and gender (Tesch-Römer et al., 2008) have already been studied. Recent research also suggests the links between commuting, SWB and emotional wellbeing assessment (Olson et al. 2013; Kahneman et al. 2004). However, more research is needed to understand how these socio-demographic variables, connect as well with the decisions on main transport mode choices; or research distinguishing between hedonic (journey experience) and eudaimonic (flourishing) value of trips. 
+
+The research needs already recognized in the developed world are also markedly acute in the context of the Global South, where historical inequality has tended to create a symbolic attachment to the automobile, in addition to negative connotations for public transport and active travel (Zorrilla et al., 2019). In this way, there is an emerging literature that investigates affective factors in travel behaviour in a number of developing countries. A cross-country study in Asia revealed that the affective factors of public transportation and car use are important, and in particular the social orderliness of transit was suggested as a way to make this mode more attractive to users (Van et al., 2014). In terms of active travel, a study in China found that attitudes that embrace new styles and technologies despite their cost are associated with the intention to continue using shared bicycles (Shao and Liang, 2019). The importance of affective factors for policy and planning is further highlighted by research in Colombia that shows how users felt proud using a bicycle shared system, in addition to experiencing feelings of belonging to a civic culture and the enjoyment and pleasure of travel itself (Bejarano et al., 2019). This paper contributes to further our understanding of affective and instrumental factors in travel behaviour in a developing country.
+
+Data and Methods
+===================
+
+This paper implements an analysis of correspondence comparing the primary mode of transportation with affective and utilitarian SWB factors in a sample of travellers in Santiago de Chile.  
+
+## Sample
+
+The study is based on a survey conducted in Santiago during the months of November and December 2016, that collected information on a wide range of travel and related issues. The data collection considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. An equal representation of both genders and a representation of the proportion of inhabitants per area have been chosen as relevant characteristics of the sample. In total, 451 persons validly completed the survey. In the first part of the questionnaire the participants were asked about basic socio-demographic data and main transport mode for commuting. In the second part, the questionnaire asked about the modes that people associate with affective and instrumental positive concepts of commuting, as well as the levels of overall satisfaction with the trips. These two sections of the survey have been considered for the analysis of this paper. 
+The second part of the survey asked about the association between the primary transport mode and 18 positive and negative feelings. The question is: “Indicate the modes that you associate to the following feelings”. The respondents could indicate all the modes they associated to the feelings on the list. Three affective and three instrumental/utilitarian factors, all positive, have been considered for this analysis: freedom, enjoyment, happiness (affective), and security, time savings, efficiency (instrumental/utilitarian).
+The questionnaire provides a binary indicator that describes the presence or absence of modal correspondence for each one the selected six factors. The analysis has considered socioeconomic variables (gender, age, education, occupation, income, disabilities), as well as other variables as driving licence, journey times, monthly expenditure on transport and satisfaction with the overall trip.
+
+[REPORT DESCRIPTIVE STATISTICS? Include definitions, e.g., is K-12 equivalent to “minimal mandatory education”? What is Tech Univ? What are the range of values of low, middle, high income? Journey time is in minutes]
+
+## Analytical Approach
+
+The analytical approach in this paper is based on correspondence. Previous research has developed the concept of modal dissonance for referring to the mismatch between the actual mode and the mode that enables users to experience positive affective or instrumental factors (De Vos et al., (2012; 2014) and Schwanen and Mokhtarian, 2004, 2005a, 2005b). More concretely, Schwanen and Mokhtarian (2004; 89) define dissonance based on the incongruence between residential neighbourhood where the individual currently resides and her preference structure toward such characteristics of the residential environment. In this paper we consider correspondence, which happens when travellers associate the positive utilitarian and affective SWB factors to the mode they have used as their primary transport mode for commuting or performing their main activities. The opposite of correspondence would be modal dissonance.
+
+More specifically, the concept of modal dissonance means that a user of mode X identifies a different mode Y when associating affective values. For example, a user of private transport (i.e., mode “Car”)  may select mode “Bicycle” when asked about the of the association between the concept of freedom to a transport mode. In this case, the person who uses the mode “Car” as their primary mode of transportation attaches positive emotional and instrumental factors not to that mode, but to a different one – in this case to the bicycle. It could be the case that the modal dissonance corresponds just to one of the types of factors, either affective or instrumental. For example, it is possible that a person who uses the Metro as their main transport mode associates that mode to the instrumental factors (security, time savings, efficiency) – but relates positive emotional factors (freedom, enjoyment, happiness) to a different mode, say to the bicycle. 
+
+The ways for measuring equity in transport projects and the most vulnerable groups affected by transport have been the aspects that have nurtured the focus of this study. The hypothesis is that public transport users will show a lower correspondence between their primary mode and the modes they relate with positive factors of SWB. This is relevant as more disadvantaged people have less options of choosing their preferred transport modes and they tend to associate positive affective and instrumental factors to modes that they are not able to use. These perceptions evidence equity gaps between groups – where the most vulnerable groups are much more affected.
+The methods used are analysis of correspondence and multinomial regression, both around the associations of transport modes and affective and instrumental factors, derived from the SWB framework.
+
+
+Results
+==========
+
+```{r cross-with-instrumental, include=FALSE, eval=FALSE}
+
+# Create cross tabulations by each respondent characteristic (i.e., AGE, EDUCATION, INCOME, mode USED, and TRAVEL_TIME)
+
+## Age
+
+age_by_freedom <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "FREEDOM_DISSONANCE", type = "r")
+age_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+age_by_happiness <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+age_by_safety <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "SAFETY_DISSONANCE", type = "r")
+age_by_time <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "TIME_DISSONANCE", type = "r")
+age_by_efficiency <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "EFFICIENCY_DISSONANCE", type = "r")
+
+## Education
+
+education_by_freedom <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "FREEDOM_DISSONANCE", type = "r")
+education_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+education_by_happiness <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+education_by_safety <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "SAFETY_DISSONANCE", type = "r")
+education_by_time <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "TIME_DISSONANCE", type = "r")
+education_by_efficiency <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "EFFICIENCY_DISSONANCE", type = "r")
+
+## Income
+
+income_by_freedom <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "FREEDOM_DISSONANCE", type = "r")
+income_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+income_by_happiness <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+income_by_safety <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "SAFETY_DISSONANCE", type = "r")
+income_by_time <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "TIME_DISSONANCE", type = "r")
+income_by_efficiency <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "EFFICIENCY_DISSONANCE", type = "r")
+
+## Mode
+
+mode_by_freedom <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "FREEDOM_DISSONANCE", type = "r")
+mode_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+mode_by_happiness <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+mode_by_safety <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "SAFETY_DISSONANCE", type = "r")
+mode_by_time <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "TIME_DISSONANCE", type = "r")
+mode_by_efficiency <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "EFFICIENCY_DISSONANCE", type = "r")
+
+## Travel Time
+
+time_by_freedom <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "FREEDOM_DISSONANCE", type = "r")
+time_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+time_by_happiness <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+time_by_safety <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "SAFETY_DISSONANCE", type = "r")
+time_by_time <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "TIME_DISSONANCE", type = "r")
+time_by_efficiency <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "EFFICIENCY_DISSONANCE", type = "r")
+
+```
+
+```{r cross-without-instrumental, include=FALSE}
+
+# Create cross tabulations by each respondent characteristic (i.e., AGE, EDUCATION, INCOME, mode USED, and TRAVEL_TIME)
+
+## Age
+
+age_by_freedom <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "FREEDOM_DISSONANCE", type = "r")
+age_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+age_by_happiness <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+age_by_poverty <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "POVERTY_DISSONANCE", type = "r")
+age_by_luxury <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "LUXURY_DISSONANCE", type = "r")
+age_by_status <- crosstab(Overall_dissonance, row.vars = "AGE", col.vars = "STATUS_DISSONANCE", type = "r")
+
+## Education
+
+education_by_freedom <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "FREEDOM_DISSONANCE", type = "r")
+education_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+education_by_happiness <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+education_by_poverty <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "POVERTY_DISSONANCE", type = "r")
+education_by_luxury <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "LUXURY_DISSONANCE", type = "r")
+education_by_status <- crosstab(Overall_dissonance, row.vars = "EDUCATION", col.vars = "STATUS_DISSONANCE", type = "r")
+
+## Income
+
+income_by_freedom <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "FREEDOM_DISSONANCE", type = "r")
+income_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+income_by_happiness <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+income_by_poverty <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "POVERTY_DISSONANCE", type = "r")
+income_by_luxury <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "LUXURY_DISSONANCE", type = "r")
+income_by_status <- crosstab(Overall_dissonance, row.vars = "INCOME", col.vars = "STATUS_DISSONANCE", type = "r")
+
+## Mode
+
+mode_by_freedom <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "FREEDOM_DISSONANCE", type = "r")
+mode_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+mode_by_happiness <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+mode_by_poverty <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "POVERTY_DISSONANCE", type = "r")
+mode_by_luxury <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "LUXURY_DISSONANCE", type = "r")
+mode_by_status <- crosstab(Overall_dissonance, row.vars = "USED", col.vars = "STATUS_DISSONANCE", type = "r")
+
+## Travel Time
+
+time_by_freedom <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "FREEDOM_DISSONANCE", type = "r")
+time_by_enjoyment <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "ENJOYMENT_DISSONANCE", type = "r")
+time_by_happiness <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "HAPPINESS_DISSONANCE", type = "r")
+time_by_poverty <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "POVERTY_DISSONANCE", type = "r")
+time_by_luxury <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "LUXURY_DISSONANCE", type = "r")
+time_by_status <- crosstab(Overall_dissonance, row.vars = "TRAVEL_TIME", col.vars = "STATUS_DISSONANCE", type = "r")
+
+```
+
+```{r collect-cross-tabulation-results-with-instrumental, include=FALSE, eval=FALSE}
+
+# Collect the cross tabulations for each of the respondent's characteristics and the ATTRIBUTES
+
+## Age
+
+age_results <- cbind(age_by_freedom$crosstab, 
+                     age_by_enjoyment$crosstab, 
+                     age_by_happiness$crosstab,
+                     age_by_safety$crosstab,
+                     age_by_time$crosstab,
+                     age_by_efficiency$crosstab)
+
+# Drop the row totals
+age_results <- age_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(age_results) <- c("Freedom", "Enjoyment", "Happiness", "Safety", "Time", "Efficiency")
+
+# Convert to dataframe and make the rownames a variable
+age_results <- age_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+age_results <- age_results %>%
+  mutate(chi2.freedom = summary(age_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(age_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(age_by_happiness$table)$p.value,
+         chi2.safety = summary(age_by_safety$table)$p.value,
+         chi2.time = summary(age_by_time$table)$p.value,
+         chi2.efficiency = summary(age_by_efficiency$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Safety,
+         chi2.safety,
+         Time,
+         chi2.time,
+         Efficiency,
+         chi2.efficiency)
+
+## Education
+
+education_results <- cbind(education_by_freedom$crosstab, 
+                     education_by_enjoyment$crosstab, 
+                     education_by_happiness$crosstab,
+                     education_by_safety$crosstab,
+                     education_by_time$crosstab,
+                     education_by_efficiency$crosstab)
+
+# Drop the row totals
+education_results <- education_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(education_results) <- c("Freedom", "Enjoyment", "Happiness", "Safety", "Time", "Efficiency")
+
+# Convert to dataframe and make the rownames a variable
+education_results <- education_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+education_results <- education_results %>%
+  mutate(chi2.freedom = summary(education_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(education_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(education_by_happiness$table)$p.value,
+         chi2.safety = summary(education_by_safety$table)$p.value,
+         chi2.time = summary(education_by_time$table)$p.value,
+         chi2.efficiency = summary(education_by_efficiency$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Safety,
+         chi2.safety,
+         Time,
+         chi2.time,
+         Efficiency,
+         chi2.efficiency)
+
+## Income
+
+income_results <- cbind(income_by_freedom$crosstab, 
+                     income_by_enjoyment$crosstab, 
+                     income_by_happiness$crosstab,
+                     income_by_safety$crosstab,
+                     income_by_time$crosstab,
+                     income_by_efficiency$crosstab)
+
+# Drop the row totals
+income_results <- income_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(income_results) <- c("Freedom", "Enjoyment", "Happiness", "Safety", "Time", "Efficiency")
+
+# Convert to dataframe and make the rownames a variable
+income_results <- income_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+income_results <- income_results %>%
+  mutate(chi2.freedom = summary(income_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(income_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(income_by_happiness$table)$p.value,
+         chi2.safety = summary(income_by_safety$table)$p.value,
+         chi2.time = summary(income_by_time$table)$p.value,
+         chi2.efficiency = summary(income_by_efficiency$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Safety,
+         chi2.safety,
+         Time,
+         chi2.time,
+         Efficiency,
+         chi2.efficiency)
+
+## Mode USED
+
+mode_results <- cbind(mode_by_freedom$crosstab, 
+                     mode_by_enjoyment$crosstab, 
+                     mode_by_happiness$crosstab,
+                     mode_by_safety$crosstab,
+                     mode_by_time$crosstab,
+                     mode_by_efficiency$crosstab)
+
+# Drop the row totals
+mode_results <- mode_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(mode_results) <- c("Freedom", "Enjoyment", "Happiness", "Safety", "Time", "Efficiency")
+
+# Convert to dataframe and make the rownames a variable
+mode_results <- mode_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+mode_results <- mode_results %>%
+  mutate(chi2.freedom = summary(mode_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(mode_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(mode_by_happiness$table)$p.value,
+         chi2.safety = summary(mode_by_safety$table)$p.value,
+         chi2.time = summary(mode_by_time$table)$p.value,
+         chi2.efficiency = summary(mode_by_efficiency$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Safety,
+         chi2.safety,
+         Time,
+         chi2.time,
+         Efficiency,
+         chi2.efficiency)
+
+## Time
+
+time_results <- cbind(time_by_freedom$crosstab, 
+                     time_by_enjoyment$crosstab, 
+                     time_by_happiness$crosstab,
+                     time_by_safety$crosstab,
+                     time_by_time$crosstab,
+                     time_by_efficiency$crosstab)
+
+# Drop the row totals
+time_results <- time_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(time_results) <- c("Freedom", "Enjoyment", "Happiness", "Safety", "Time", "Efficiency")
+
+# Convert to dataframe and make the rownames a variable
+time_results <- time_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+time_results <- time_results %>%
+  mutate(chi2.freedom = summary(time_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(time_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(time_by_happiness$table)$p.value,
+         chi2.safety = summary(time_by_safety$table)$p.value,
+         chi2.time = summary(time_by_time$table)$p.value,
+         chi2.efficiency = summary(time_by_efficiency$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Safety,
+         chi2.safety,
+         Time,
+         chi2.time,
+         Efficiency,
+         chi2.efficiency)
+```
+
+```{r collect-cross-tabulation-results-without-instrumental, include=FALSE}
+
+# Collect the cross tabulations for each of the respondent's characteristics and the ATTRIBUTES
+
+## Age
+
+age_results <- cbind(age_by_freedom$crosstab, 
+                     age_by_enjoyment$crosstab, 
+                     age_by_happiness$crosstab,
+                     age_by_poverty$crosstab,
+                     age_by_luxury$crosstab,
+                     age_by_status$crosstab)
+
+# Drop the row totals
+age_results <- age_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(age_results) <- c("Freedom", "Enjoyment", "Happiness", "Poverty", "Luxury", "Status")
+
+# Convert to dataframe and make the rownames a variable
+age_results <- age_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+age_results <- age_results %>%
+  mutate(chi2.freedom = summary(age_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(age_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(age_by_happiness$table)$p.value,
+         chi2.poverty = summary(age_by_poverty$table)$p.value,
+         chi2.luxury = summary(age_by_luxury$table)$p.value,
+         chi2.status = summary(age_by_status$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Poverty,
+         chi2.poverty,
+         Luxury,
+         chi2.luxury,
+         Status,
+         chi2.status)
+
+## Education
+
+education_results <- cbind(education_by_freedom$crosstab, 
+                     education_by_enjoyment$crosstab, 
+                     education_by_happiness$crosstab,
+                     education_by_poverty$crosstab,
+                     education_by_luxury$crosstab,
+                     education_by_status$crosstab)
+
+# Drop the row totals
+education_results <- education_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(education_results) <- c("Freedom", "Enjoyment", "Happiness", "Poverty", "Luxury", "Status")
+
+# Convert to dataframe and make the rownames a variable
+education_results <- education_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+education_results <- education_results %>%
+  mutate(chi2.freedom = summary(education_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(education_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(education_by_happiness$table)$p.value,
+         chi2.poverty = summary(education_by_poverty$table)$p.value,
+         chi2.luxury = summary(education_by_luxury$table)$p.value,
+         chi2.status = summary(education_by_status$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Poverty,
+         chi2.poverty,
+         Luxury,
+         chi2.luxury,
+         Status,
+         chi2.status)
+
+## Income
+
+income_results <- cbind(income_by_freedom$crosstab, 
+                     income_by_enjoyment$crosstab, 
+                     income_by_happiness$crosstab,
+                     income_by_poverty$crosstab,
+                     income_by_luxury$crosstab,
+                     income_by_status$crosstab)
+
+# Drop the row totals
+income_results <- income_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(income_results) <- c("Freedom", "Enjoyment", "Happiness", "Poverty", "Luxury", "Status")
+
+# Convert to dataframe and make the rownames a variable
+income_results <- income_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+income_results <- income_results %>%
+  mutate(chi2.freedom = summary(income_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(income_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(income_by_happiness$table)$p.value,
+         chi2.poverty = summary(income_by_poverty$table)$p.value,
+         chi2.luxury = summary(income_by_luxury$table)$p.value,
+         chi2.status = summary(income_by_status$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Poverty,
+         chi2.poverty,
+         Luxury,
+         chi2.luxury,
+         Status,
+         chi2.status)
+
+## Mode USED
+
+mode_results <- cbind(mode_by_freedom$crosstab, 
+                     mode_by_enjoyment$crosstab, 
+                     mode_by_happiness$crosstab,
+                     mode_by_poverty$crosstab,
+                     mode_by_luxury$crosstab,
+                     mode_by_status$crosstab)
+
+# Drop the row totals
+mode_results <- mode_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(mode_results) <- c("Freedom", "Enjoyment", "Happiness", "Poverty", "Luxury", "Status")
+
+# Convert to dataframe and make the rownames a variable
+mode_results <- mode_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+mode_results <- mode_results %>%
+  mutate(chi2.freedom = summary(mode_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(mode_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(mode_by_happiness$table)$p.value,
+         chi2.poverty = summary(mode_by_poverty$table)$p.value,
+         chi2.luxury = summary(mode_by_luxury$table)$p.value,
+         chi2.status = summary(mode_by_status$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Poverty,
+         chi2.poverty,
+         Luxury,
+         chi2.luxury,
+         Status,
+         chi2.status)
+
+## Time
+
+time_results <- cbind(time_by_freedom$crosstab, 
+                     time_by_enjoyment$crosstab, 
+                     time_by_happiness$crosstab,
+                     time_by_poverty$crosstab,
+                     time_by_luxury$crosstab,
+                     time_by_status$crosstab)
+
+# Drop the row totals
+time_results <- time_results[,c(2, 5, 8, 11, 14, 17)]
+
+# Change column names
+colnames(time_results) <- c("Freedom", "Enjoyment", "Happiness", "Poverty", "Luxury", "Status")
+
+# Convert to dataframe and make the rownames a variable
+time_results <- time_results %>%
+  as.data.frame() %>%
+  rownames_to_column()
+
+# Add significance of chi2 tests
+time_results <- time_results %>%
+  mutate(chi2.freedom = summary(time_by_freedom$table)$p.value,
+         chi2.enjoyment = summary(time_by_enjoyment$table)$p.value,
+         chi2.happiness = summary(time_by_happiness$table)$p.value,
+         chi2.poverty = summary(time_by_poverty$table)$p.value,
+         chi2.luxury = summary(time_by_luxury$table)$p.value,
+         chi2.status = summary(time_by_status$table)$p.value) %>%
+  dplyr::select(rowname, 
+         Freedom, 
+         chi2.freedom,
+         Enjoyment,
+         chi2.enjoyment,
+         Happiness,
+         chi2.happiness,
+         Poverty,
+         chi2.poverty,
+         Luxury,
+         chi2.luxury,
+         Status,
+         chi2.status)
+```
+
+```{r crosstab-all-results-with-instrumental, include=FALSE, eval=FALSE}
+
+# Here we bind all the results into a single dataframe for printing
+
+xtab_results <- rbind(age_results,
+                      education_results,
+                      income_results,
+                      mode_results,
+                      time_results) %>%
+  mutate(chi2.freedom = ifelse(chi2.freedom >= 0.001, paste0(round(chi2.freedom, 4)), "$<0.001$"),
+         chi2.enjoyment = ifelse(chi2.enjoyment >= 0.001, paste0(round(chi2.enjoyment, 4)), "$<0.001$"),
+         chi2.happiness = ifelse(chi2.happiness >= 0.001, paste0(round(chi2.happiness, 4)), "$<0.001$"),
+         chi2.safety = ifelse(chi2.safety >= 0.001, paste0(round(chi2.safety, 4)), "$<0.001$"),
+         chi2.time = ifelse(chi2.time >= 0.001, paste0(round(chi2.time, 4)), "$<0.001$"),
+         chi2.efficiency = ifelse(chi2.efficiency >= 0.001, paste0(round(chi2.efficiency, 4)), "$<0.001$"))
+
+xtab_results[10:13, 3] <- "$< 0.001$"
+```
+
+```{r crosstab-all-results-without-instrumental, echo=FALSE}
+
+# Here we bind all the results into a single dataframe for printing
+
+xtab_results <- rbind(age_results,
+                      education_results,
+                      income_results,
+                      mode_results,
+                      time_results) %>%
+  mutate(chi2.freedom = ifelse(chi2.freedom >= 0.001, paste0(round(chi2.freedom, 4)), "$<0.001$"),
+         chi2.enjoyment = ifelse(chi2.enjoyment >= 0.001, paste0(round(chi2.enjoyment, 4)), "$<0.001$"),
+         chi2.happiness = ifelse(chi2.happiness >= 0.001, paste0(round(chi2.happiness, 4)), "$<0.001$"),
+         chi2.poverty = ifelse(chi2.poverty >= 0.001, paste0(round(chi2.poverty, 4)), "$<0.001$"),
+         chi2.luxury = ifelse(chi2.luxury >= 0.001, paste0(round(chi2.luxury, 4)), "$<0.001$"),
+         chi2.status = ifelse(chi2.status >= 0.001, paste0(round(chi2.status, 4)), "$<0.001$"))
+
+xtab_results[10:13, 3] <- "$< 0.001$"
+```
+
+## Who experiences dissonance?
+
+The first step of the analysis seeks to understand whether there are statistical associations between the variables of interest. The analysis considers the cases where there is a lack of correspondence between the primary mode choice and the 6 SWB/instrumental factors previously described  – or in other words, where there is modal dissonance. 
+
+Table 1 shows the results of the analysis of correspondence and the dissonances between the primary mode of travel on the one hand, and SWB and instrumental factors on the other. As seen in the table, there are five categories that we use for the analysis. Three of these categories are socio-economic and demographic, namely age, level of education, income. The other two categories are transportation related, namely primary mode of travel and journey time. Correspondence is tested in every case by means of the $\chi^2$ statistic. It is interesting to note that the only category for which all affective/instrumental factors are significant at better than 5% level of confidence is mode of travel.
+
+With respect to age, we observe that levels of dissonance tend to be high in general, and the results indicate that when it comes to affective factors, dissonance levels tend to be significantly higher for younger travellers, in particular Enjoyment. In terms of instrumental factors, dissonance also tends to significantly decline with age when considering Security. On the other hand, the levels of dissonance in terms of Time Savings and Efficiency, while high, do not show significant differences by age group. Overall, the findings suggest that dissonance tends to decline with age. 
+
+The results indicate that the category of Education is less useful to discriminate between different levels of dissonance. Two affective factors are significant at 10% or better (Freedom and Happiness) and show that dissonance tends to decline at higher levels of education. One instrumental factor is significant at 10% or better (Time Savings) and we see there that the level of dissonance tends to grow with higher levels of education. Another instrumental factor (Security) is significant at 5% or better and shows that dissonance in this factor declines with higher education. The picture that emerges is of highly educated people who are relatively less dissatisfied with their primary mode of transportation when it comes to Freedom, Happiness, and Security, but more dissatisfied with their Time Savings than people who are less highly educated. 
+
+In general, dissonance tends to be higher for lower income individuals. Table 1 shows that the low-income segment has a significantly higher percentage of cases of dissonance for two affective factors. In the case of Freedom, for example, the lack of correspondence for low-income is 83.9% compared to 60% for the high-income segment. The levels of dissonance are higher for Enjoyment and follow the same decreasing trend for higher levels of income. Dissonance is marginally lower for instrumental factors, and significant for Security and Time Savings. 
+
+As noted above, there are significant differences in dissonance by primary mode of travel, both for affective and instrumental factors. For affective factors, the highest levels of dissonance tend to be for users of public transportation, and the lowest for car users and active travellers. For instance, feelings of Freedom, Enjoyment, and Happiness are more frequently expressed by users of car and active travellers than users of public transportation. Indeed, people who travel by Metro or Bus almost never associate any of these positive affective attributes to these modes (dissonance is consistently greater than 90%). In contrast, active travellers have some of the lowest levels of dissonance in all three affective factors, in particular Freedom and Happiness. This analysis is in line with previous research regarding car, active travel, and public transportation (e.g., Steg et al., 2001; Páez and Whalen, 2010; Whalen et al., 2013), which tend to agree on the negative associations in the perception of affective factors when the primary mode is Metro or bus. 
+
+Figure 4 shows the percentage of dissonance by primary transport mode, for both affective and instrumental factors. For instance, the graph at the top shows that the highest percentages of dissonances come from users of Metro and bus , compared to other modes as the car or active transport. This is consistent with previous studies that have separately demonstrated that public transport users tend to assess more negatively subjective factors (explored e.g. in Stradling et al., 1999; Gatersleben and Uzzell, 2007). For example, although car users have higher dissonance values than active transport, comparatively this segment has much lower percentages of dissonances than public transport, idea also supported by research that has shown that car users tend to attribute importance to symbolic aspects that positively contribute to their perception on driving (Steg et al., 2001; Mokhtarian and Salomon, 2001). 
+
+Freedom and happiness tend to have a lower percentage of dissonances in the case of active transport, which means that cyclists and individuals who mainly walk for their commutes, tend to associate positive subjective values while using these modes. This is also consistent with other studies that have shown positive affective associations with the use of cycling and walking (Anable and Gatersleben, 2005; Gatersleben and Uzzell, 2007). The question at the survey has not specify the dimensions of freedom, thus has open the door for different interpretations as the freedom to choose certain mode or route, freedom while using the mode, or the freedom to access to certain places while travelling.
+Journey time: As shown in Figure 3, the analysis carried out by journey time also reveals coincidences with previous research in this area, since for shorter trips (up to 20 minutes) the analysis shows less dissonance between the primary mode and positive subjective associations mainly for affective factors. On the contrary, as journey time increases, higher is the dissonance. Strangely, the feelings of Security and Efficiency have not been statistically representative for the Journey Time analysis. 
+
+In terms of instrumental factors, interestingly Figure 4 shows that bus users have the lowest percentage of dissonance regarding time savings (29%). However, considering the other instrumental factors, bus users have a high percentage of dissonance for security and efficiency. In the case of security, this means that most bus users (71%) have considered the bus as a mode that they associate to time-savings, although it is the mode that has more dissonant evaluations in all other SWB factors. This also seems difficult to explain considering the negative evaluation that the Transantiago system has consistently had. Some data provided by the Survey of Satisfaction with Transantiago Operators (DTPM, 2017) is about users' perception of journey time from origin to destination. In this question, and after 10 years of implementation of the system, users diagnose an average journey of 47 minutes, a value that tends to increase with respect to the data delivered by the same survey 5 years before (43.5 minutes on average). Worryingly, long trips of more than 30 minutes have had inconsistent variability over the years, reaching an average of more than 37 minutes in 2016. Short trips, however, remain roughly equal to previous years, and do not show significant changes in the average of 6-7 minutes per trip . This survey has the peculiarity  of being developed by the Metropolitan Public Transport Board (DTPM), whose mission is to articulate the functions of the different modes of public transport with a specific interest in buses Transantiago and Metro de Santiago. 
+
+Another big gap on these instrumental factors relates to the perception of security that is especially significant for car users. This means that a 75% of car users have chosen as primary mode the same one as they relate to the feeling of security, which is completely opposite to other transport modes, specially bus users. Bus users have the highest dissonance (98%), which means that practically all this group of users have chosen another mode for referring to the feelings of security. The recently referred DTPM survey does not have any particular question that addresses the issue of safety – mostly related in this context as security.  
+
+```{r table-cross-tabulation-results-with-instrumental, echo = FALSE, eval=FALSE}
+kable(xtab_results,
+      "latex",
+      digits = 2,
+      booktabs = TRUE,
+      caption = "\\label{tab:cross-tabulation-results}Percentage of respondents who report mode dissonance with respect to various SWB and instrumental factors",
+      escape = FALSE,
+      align = c("l", rep("c", 12)),
+      col.names = c("Variable", 
+                    "Freedom", "$\\chi^2$ p-val", 
+                    "Enjoyment", "$\\chi^2$ p-val",
+                    "Happiness", "$\\chi^2$ p-val",
+                    "Safety", "$\\chi^2$ p-val",
+                    "Time", "$\\chi^2$ p-val",
+                    "Efficiency", "$\\chi^2$ p-val")) %>%
+  collapse_rows(columns = c(3, 5, 7, 9, 11, 13), latex_hline = "major", valign = "middle") %>%
+  pack_rows("Age", 1, 3) %>%
+  pack_rows("Education", 4, 6) %>%
+  pack_rows("Income", 7, 9) %>%
+  pack_rows("Mode", 10, 13) %>%
+  pack_rows("Journey Time", 14, 17)  %>%
+  kable_styling(bootstrap_options = c("striped", "scaled_down")) %>%
+  landscape()
+```
+
+```{r table-cross-tabulation-results-without-instrumental, echo = FALSE}
+kable(xtab_results,
+      "latex",
+      digits = 2,
+      booktabs = TRUE,
+      caption = "\\label{tab:cross-tabulation-results}Percentage of respondents who report mode dissonance with respect to various SWB and instrumental factors",
+      escape = FALSE,
+      align = c("l", rep("c", 12)),
+      col.names = c("Variable", 
+                    "Freedom", "$\\chi^2$ p-val", 
+                    "Enjoyment", "$\\chi^2$ p-val",
+                    "Happiness", "$\\chi^2$ p-val",
+                    "Poverty", "$\\chi^2$ p-val",
+                    "Luxury", "$\\chi^2$ p-val",
+                    "Status", "$\\chi^2$ p-val")) %>%
+  collapse_rows(columns = c(3, 5, 7, 9, 11, 13), latex_hline = "major", valign = "middle") %>%
+  pack_rows("Age", 1, 3) %>%
+  pack_rows("Education", 4, 6) %>%
+  pack_rows("Income", 7, 9) %>%
+  pack_rows("Mode", 10, 13) %>%
+  pack_rows("Journey Time", 14, 17)  %>%
+  kable_styling(bootstrap_options = c("striped", "scaled_down")) %>%
+  landscape()
+```
+
+Figure 5 shows the points of origin of the survey for the case of public transport users. Metro users as primary mode are shown, bus users are shown in cyan. The size of the points represents the number of dissonances. The higher the point, the greater the number of SWB factors that do not coincide with the primary transport mode. The image shows that the intensity or size of the circles is homogeneously distributed in the territory, even though the blue circles (metro) tend to show slightly less dissonance. The visualisation of this map is more dramatic when it is compared to the following Figure 6.
+
+Figure 6 shows the points of origin for the case of private transport (cars) and active transport (walking and cycling). Again, the size of the circles represents intensity levels of dissonance. The number of dissonances is lower than in the case of Figure 5, which indicates that users of private and active transport tend to use a mode of transport that they relate to one of the positive factors derived from subjective wellbeing. In this sense, it could be said that this type of user tends to be more advantaged than the public transport user, in a dimension not only utilitarian but also emotional and attitudinal.
+
+## Which modes do travelers associate with affective and instrumental values?
+
+Here we can visualize the modes that travellers associate with different affective and instrumental values. The tool we use for this is a mosaic plot. See the mosaic plots in Figure \ref{fig:mosaic-plots-by-attribute}.
+
+```{r figure-mosaic-plots-by-attribute-with-instrumental, echo=FALSE, cache = TRUE, eval=FALSE, fig.cap="\\label{fig:mosaic-plots-by-attribute}Mosaic plots for three affective and three instrumental values; values on the x-axis represent proportion of modes selected for each value, and values on the y-axis represent proportion of respondents by main mode of transportation"}
+
+ggplot(data = Modes_by_Attribute) + 
+  geom_mosaic(aes(product(IDEAL, USED), fill = IDEAL, weight = WEIGHT),
+              divider = mosaic("vertical")) + 
+  xlab("Mode selected for the value of {Freedom, Enjoyment, Happiness, Safety, Time, Efficiency}") +
+  ylab("Main mode of transportation") +
+  scale_fill_viridis_d(direction = -1) +
+  facet_wrap(~ ATTRIBUTE) +
+  theme_tufte() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r figure-mosaic-plots-by-attribute-without-instrumental, echo=FALSE, cache = TRUE,  fig.cap="\\label{fig:mosaic-plots-by-attribute}Mosaic plots for three affective and three instrumental values; values on the x-axis represent proportion of modes selected for each value, and values on the y-axis represent proportion of respondents by main mode of transportation"}
+
+ggplot(data = Modes_by_Attribute %>% filter(ATTRIBUTE %in% c("FREEDOM", "ENJOYMENT", "HAPPINESS", "POVERTY", "LUXURY", "STATUS"))) + 
+  geom_mosaic(aes(product(IDEAL, USED), fill = IDEAL, weight = WEIGHT),
+              divider = mosaic("vertical")) + 
+  xlab("Proportion of responses by mode associated with {Freedom, Enjoyment, Happiness, Poverty, Luxury, Status}") +
+  ylab("Proportion of respondents by primary mode of travel") +
+  scale_fill_viridis_d(direction = -1) +
+  facet_wrap(~ ATTRIBUTE) +
+  theme_tufte() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Conclusions
+==========
+
+Words go here.
+
+References {#references .unnumbered}
+==========
