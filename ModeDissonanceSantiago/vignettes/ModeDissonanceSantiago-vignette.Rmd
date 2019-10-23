@@ -1,0 +1,77 @@
+---
+title: "How to Use Package ModeDissonanceSantiago"
+author: "Antonio Paez"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ModeDissonanceSantiago-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The package `ModeDissonanceSantiago` includes a dataset and utility functions to work with cross-tabulations. 
+
+The dataset is a subset of data collected by Dr. Beatriz G. Mella Lira in Santiago de Chileduring the months of November and December 2016, that is, the end of the Spring and beginning of Summer. The data collection exercise considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. An equal representation of both genders and a representation of the proportion of inhabitants per area were chosen as relevant characteristics of the sample. In total, there were $n=451$ valid surveys, although not every survey was complete and there are missing responses for some answers.
+
+The survey was structured in eight sections, as follows: 1) Individual characteristics of respondent; 2) Health; 3) Feelings and emotions; 4) Reasons for travel and planning travel; 5) Social interaction; 6) Nature and sustainability; 7) Information and telecommunications; 8) Built environment; and 9) Commuting. For the present study, we draw data from sections 1), 3) and 9). In terms of individual characteristics of the respondents and their commute, participants were asked about basic socio-demographic information, including age, level of education, income, and the typical duration of their regular commute. 
+
+The dataset can be downloaded from [add link] and installed using the packages tab in R Studio or from the command line.
+
+Once that the package is in your library, you can load it as follows:
+```{r setup}
+library(ModeDissonanceSantiago)
+```
+
+Also load some useful packages for data manipulation and plotting:
+```{r packages}
+library(dplyr)
+library(ggplot2)
+```
+
+The dataset is documented, and the documentation can be seen in the usual way:
+```{r help-dataset}
+?Dissonance_Santiago
+```
+
+As seen in the documentation, the dataset is a dataframe with 451 rows and 24 variables. The dataframe _lazyloads_, which means that it is not loaded to the workspace/environment until it is needed.
+
+We can summarize the contents of the dataframe:
+```{r summary-dataframe}
+summary(Dissonance_Santiago)
+```
+
+Most variables are coded as characters, but it is better to work with them as factors. You can convert to factor using the appropriate coding as per the documentation. For instance, to convert the variable `USED` (the primary mode of travel of the respondent), use `dplyr::mutate`:
+```{r convert-used-to-factor}
+library(dplyr)
+Dissonance_Santiago <- Dissonance_Santiago %>%
+  mutate(USED = factor(USED, 
+                       levels = c("A", "B", "C", "D", "E", "F", "G", "H"),
+                       labels = c("Car",
+                                  "Taxi",
+                                  "Colectivo",
+                                  "Moto",
+                                  "Metro",
+                                  "Bus",
+                                  "Bicycle",
+                                  "Walk")))
+```
+
+Summarize the variable USED:
+```{r summary-used}
+summary(Dissonance_Santiago$USED)
+```
+
+Also, create a bar plot to visualize this variable:
+```{r bar-plot-used}
+ggplot(data = Dissonance_Santiago, aes(x = USED)) +
+  geom_bar()
+```
+
+Other variables can be converted to factors in a similar way.
