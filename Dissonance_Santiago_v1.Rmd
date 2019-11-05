@@ -14,13 +14,20 @@ address:
   - code: Some School
     address: Department, Street, City, State, Zip
 abstract: |
-  Subjective wellbeing is a topic that has attracted considerable attention in recent years due to the way it correlates with health. From a transportation perspective, there is a burgeoning literature on the way travel can impact subjective wellbeing, and how this, in turn, can influence behavior. After decades of fascination with the automobile, subjective wellbeing is increasingly recognized as an alternative approach to assess transportation, and to gain valuable insights to attract and retain active travelers and users of public transportation. The objective of this paper is to analyze a number of affective values associated with subjective wellbeing and the modes of transportation that people commonly use. In particular, we are interested in the potential for dissonance with respect to the primary mode of travel. The study is based on data collected from a sample of travellers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name the mode or modes that they associate with the affective values of freedom, enjoyment, happiness, poverty, luxury and status. The results indicate that users of public transportation experience the most dissonance in terms of affective values, and active travellers the least. For those travellers who experience dissonance, active travel is the mode most commonly associated with freedom, enjoyment, and happiness, public transportation is most commonly associated with poverty, and the automobil is most commonly associated with luxury and status.
+   **Introduction**  
+   Subjective wellbeing is a topic that has attracted considerable attention in recent years due to the way it correlates with health. From a transportation perspective, there is a burgeoning literature on the way travel can impact subjective wellbeing, and how this, in turn, can influence behavior.  
+   **Objective**  
+   The objective of this paper is to analyze a number of affective values associated with subjective wellbeing and the modes of transportation that people commonly use. In particular, we are interested in the potential for dissonance with respect to the primary mode of travel.  
+   **Materials and Methods**  
+   The study is based on data collected from a sample of travellers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name the mode or modes that they associate with the affective values of freedom, enjoyment, happiness, poverty, luxury and status. Analysis is based on tests of independence and visualization via mosaic plots.  
+   **Results**  
+   The results indicate that users of public transportation experience the most dissonance in terms of affective values, and active travellers the least. For those travellers who experience dissonance, active travel is the mode most commonly associated with freedom, enjoyment, and happiness, public transportation is most commonly associated with poverty, and the automobil is most commonly associated with luxury and status.
 
-journal: "An Elsevier journal"
+journal: "Journal of Transportation & Health"
 date: "`r Sys.Date()`"
 bibliography: mybibfile.bib
-#linenumbers: true
-#numbersections: true
+linenumbers: true
+numbersections: true
 csl: elsevier-harvard.csl
 output: rticles::elsevier_article
 ---
@@ -807,7 +814,7 @@ crosstab <- function (..., dec.places = NULL,
 }
 ```
 
-1. Introduction
+Introduction
 ===================
 
 Transportation planning for decades has focused on providing mobility for the private automobile. This is a model of development that was initially introduced in North America as a solution to problems created by rapid urbanization, and that was eventually copied elsewhere [@Brown2009planning;@Angotti1996latin]. Despite the initial promise of automotive technology, it is now evident that mobility centred on the private automobile has given rise to a litany of maladies that are in urgent need of correction. This includes environmental concerns [i.e., climate change; @Chapman2007transport] as well as numerous other social [@Boschman2008toward; @Lucas2012transport; @Lucas2019evolution], health [@Khreis2016health; @Milne2012public], and equity issues [@Bocarejo2012transport; @Martens2012justice; @Pereira2017distributive].
@@ -826,7 +833,7 @@ Research is based on data collected from a sample of travellers in the city of S
 
 The structure of the paper is as follows. After these introductory remarks, we follow up with a background section that reviews the literature. Next, we discuss the case study and data used in the research. Then, the analysis and results are presented, before concluding with some discussion and directions for future research.
 
-2. Background
+Background
 ===================
 
 A consensus has emerged in the transportation community regarding the need to complement the traditional utilitarian perspective of transportation by looking at mobility and transport issues from the lens of their affective functions. The affective value of transportation in turn is important due to its potential to improve or detract from SWB. One of the primary ways to explore this has been the satisfaction that travelers feel towards their every day mobility experience [e.g., @Bergstad2011subjective]. As a consequence, there is a wealth of research on satisfaction with the use of different modes of transportation. For example, numerous studies report that car users often have a higher level of satisfaction compared to other transport modes [@Bergstad2011affective; @Eriksson2013perceived; @Redmond2001positive; @Whalen2013mode; but see @Handy2019commute]. In a similar way, there are multiple reports that active travel also tends to yield high levels of satisfaction [@Gatersleben2007affective; @Smith2017commute; @Stlouis2014happy; @Paez2010enjoyment; @Whalen2013mode; @Handy2019commute], In contrast, public transport users tend to assess their experience more negatively [@Abenoza2017travel; @Devos2016travel; @Gatersleben2007affective; @Handy2019commute; @Paez2010enjoyment]. Multi-modal trips also influence satisfaction levels; for instance, when an individual chooses a particular mode of transportation, she will report a higher level of satisfaction with that chosen mode – perhaps as a form of _post hoc_ validation [@Susilo2014exploring].
@@ -837,14 +844,14 @@ Recent literature on SWB and its link with transport have demonstrated a relatio
 
 The research needs already recognized in the developed world are also markedly acute in the context of the Global South, where historical inequality has tended to create a symbolic attachment to the automobile, in addition to negative connotations for public transport and active travel [@Zorrilla2019exploring]. In this way, there is an emerging literature that investigates affective factors in travel behaviour in a number of developing countries. A cross-country study in Asia revealed that the affective factors of public transportation and car use are important, and in particular the social orderliness of transit was suggested as a way to make this mode more attractive to users [@Van2014effect]. In terms of active travel, a study in China found that attitudes that embrace new styles and technologies despite their cost are associated with the intention to continue using shared bicycles [@Shao2019analysis]. The importance of affective factors for policy and planning is further highlighted by research in Colombia that shows how users felt proud using a bicycle shared system, in addition to experiencing feelings of belonging to a civic culture and the enjoyment and pleasure of travel itself [@Bejarano2017user]. This paper contributes to further our understanding of affective values in travel behaviour in a developing country.  
   
-3. Case Study and Data
+Case Study and Data
 ===================
 
-## 3.1 Context
+## Context
 
 The case study to contextualize the discussion is Santiago de Chile, the capital of one of the countries with the highest levels of inequality in terms of socio-economic distribution in the world. These inequities have manifested in a disproportionate expense in transport by the different socioe-conomic sectors, a disproportion in travel times and distances travelled. On the other hand, car ownership and use of public transport in the capital are directly conditioned by strong spatial segregation – the higher the income, the higher is the use of the automobile; conversely, and the lower the income, the higher is the predisposition to use public transport. Although transport is a reflection of deep inequities in various dimensions, it has triggered an exceptional discomfort and disagreement with the daily travel experience and quality of life.
 
-## 3.2 Sample
+## Sample
 
 The study is based on a survey conducted in the city of Santiago during the months of November and December 2016, that is, the end of the Spring and beginning of Summer. The survey collected information on a wide range of travel and related issues. The data collection considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. An equal representation of both genders and a representation of the proportion of inhabitants per area were chosen as relevant characteristics of the sample. In total, there were $n=451$ valid surveys, although not every survey was complete and there were missing responses for some answers. 
 
@@ -921,7 +928,7 @@ $$
 
 Furthermore, we also expanded the responses to account for all modes identified by respondents in relation to the affective values. However, to avoid double counting the respondents in our frequency tabulations, we also calculated a sample weight that was the inverse of the number of modes selected in response to each affective value. For instance, if a respondent selected two modes in relation to affective value $i$, the two modes receive a weight of $1/2$; if a respondent selected three modes, then their weights are $1/3$; and so on. In this way we do not treat unfairly those who selected only one mode, and the sum of all weighted modes is equal to the sample size.
 
-4. Analysis and Results
+Analysis and Results
 ==========
 
 In what follows, analysis is done on two related but distinct questions. The first part of the analysis seeks to understand _who_ experiences dissonance, and the second part, building off that, aims to explore which modes of travel are more commonly identified as embodying affective values by those travellers who experience dissonance.
@@ -1500,29 +1507,29 @@ xtab_results <- rbind(age_results,
 xtab_results[10:13, 3] <- "$< 0.001$" # Edit the format of these cells to avoid six cells collapsing together in table
 ```
 
-## 4.1 Who experiences dissonance?
+## Who experiences dissonance?
 
-To investigate the first question in our analysis, we create contingency tables that tabulate the frequency of dissonance with respect to each affective value, stratified by the attributes of Age, Education, Income, Primary Mode of Travel, and typical Commute Time. Table \ref{tab:cross-tabulation-results-without-instrumental} presents the frequency (in percentage) of dissonance, in other words, the percentage of respondents out of the total in their stratum who indicated mode or mode(s) for the affective value that do not correspond to their primary mode of travel.
+To investigate the first question in our analysis, we create contingency tables that tabulate the frequency of dissonance with respect to each affective value, stratified by the attributes of Age, Education, Income, Primary Mode of Travel, and typical Commute Time. Table \ref{tab:cross-tabulation-results} presents the frequency (in percentage) of dissonance, in other words, the percentage of respondents out of the total in their stratum who indicated mode or mode(s) for the affective value that do not correspond to their primary mode of travel.
 
 As seen in the table, there are five characteristics of the respondents and their commutes that we use in the analysis. Three of these categories are socio-economic and demographic, namely age, level of education, and income. The other two are transportation related, namely primary mode of travel and commute time. The frequency tables were tested in every case by means of the $\chi^2$ test of independence ($p$-values are reported in the table; lower $p$-values mean that the null hypothesis of independence can be rejected with greater confidence). It is interesting to note that the only category for which all affective values are significant at better than 5% level of confidence is mode of travel.
 
-### 4.1.1 Age
+### Age
 
 With respect to Age, previous studies have reported that older adults tend to be more satisfied with their travel experience than younger people [@Cao2014satisfaction; @Devos2016travel; @Ye2017satisfaction]. In the case, we find that five affective values show dissonance that significantly deviates from the null hypothesis of independence, namely Freedom, Enjoyment, Happiness, Luxury, and Status. We observe that levels of dissonance tend to be high in general, and in no case less than 60%. For instance, almost 90% of travellers younger than 35 experience travel mode dissonance with respect to Freedom, and more than 94% experience dissonance with respect to enjoyment. In general, younger travellers tend to experience dissonance more frequently, with dissonance being less frequent for older travellers. The exception to this trend is Luxury, an affective value for which older travellers (age >54) experience dissonance more frequently than mid-aged travellers (ages 35-54).
 
-### 4.1.2 Education
+### Education
 
 When seen from the perspective of Education, the results do not support the hypothesis of  significant differences in the frequency of dissonance by levels of education for the values of Freedom, Enjoyment, Happiness, and Poverty, and only two affective values show significant differences between education levels: Luxury and Status. In the case of Luxury, dissonance is more frequent among people who have only K-12 education, and less frequently, albeit still high, for people with technical/university level education and post-graduate education. Furthermore, highly educated people (with postgraduate degrees) experience dissonance with respect to Status more frequently than with respect to Luxury.
 
-### 4.1.3 Income
+### Income
 
 The next variable we examine is income, and in this case three affective values are significant: Poverty, Luxury, and Status. Since Poverty is a negative affect, we see here that lower income people tend to associate this feeling to their primary mode of commuting more frequently (almost 20% of the time) than other income groups. For example, whereas approximately 16% of mid-income people are dissatisfied with their primary mode of travel in this respect, less than 7% of high income individuals are. Dissonance with respect to Luxury and Status also tends to be more common among lower income people, and declines substantially for mid- and high income respondents. Notice as well that the frequency of dissonance is higher in terms of Luxury than Status for mid- and high income people.
 
-### 4.1.4 Primary mode of travel
+### Primary mode of travel
 
-The variable that shows the largest differences in the frequency of dissonance is the primary mode of travel. It can be seen in Table \ref{tab:cross-tabulation-results-without-instrumental} that the differences are significative for all six affective values. Dissonance is particularly accute for users of public transportation when it comes to the values of Freedom, Enjoyment, and Happiness: almost 100% of users of public transportation have identified other mode or modes as better representing those values. Dissonance on these values is the least for active travellers: less than 50% of respondents associate Freedom to a different mode, and only around 60% identified a different mode when responding to the values of Enjoyment and Happiness, compared to approximately 79% and 71% of those who travelled by Car. The picture changes when the values of Poverty, Luxury, and Status are considered. In this case, dissonance is less frequent for people who travel by car: less than 3% of car users associate car with feelings of poverty, 41% associate Luxury with a mode other than car, and only about 31% relate Status to a different mode. Dissonance is more frequent in these values for active travellers, and users of public transportation and other modes, in no case being less than 75%, and being virtually 100% for users of public transportation, who consistently associate Luxury and Status with modes _other_ than public transportation. 
+The variable that shows the largest differences in the frequency of dissonance is the primary mode of travel. It can be seen in Table \ref{tab:cross-tabulation-results} that the differences are significative for all six affective values. Dissonance is particularly accute for users of public transportation when it comes to the values of Freedom, Enjoyment, and Happiness: almost 100% of users of public transportation have identified other mode or modes as better representing those values. Dissonance on these values is the least for active travellers: less than 50% of respondents associate Freedom to a different mode, and only around 60% identified a different mode when responding to the values of Enjoyment and Happiness, compared to approximately 79% and 71% of those who travelled by Car. The picture changes when the values of Poverty, Luxury, and Status are considered. In this case, dissonance is less frequent for people who travel by car: less than 3% of car users associate car with feelings of poverty, 41% associate Luxury with a mode other than car, and only about 31% relate Status to a different mode. Dissonance is more frequent in these values for active travellers, and users of public transportation and other modes, in no case being less than 75%, and being virtually 100% for users of public transportation, who consistently associate Luxury and Status with modes _other_ than public transportation. 
 
-### 4.1.5 Typical commute time
+### Typical commute time
 
 Turning now to typical commute time, four affectie values show significant differences at better than 10% confidence: Freedom, Happiness, Luxury, and Status. Perhaps not surprisingly, dissonance is more frequent among people whose typical commutes are longer. This is in line with previous findings: both St-Louis et al. [-@Stlouis2014happy] and Smith [-@Smith2017commute] report that commute satisfaction tends to decline with longer commutes, whereas Handy and Thigpen [-@Handy2019commute] found that commute distance was a negative covariate of commute satisfaction. 
 
@@ -1576,7 +1583,7 @@ kable(xtab_results,
   landscape()
 ```
 
-## 4.2 Which modes do travellers associate with affective values?
+## Which modes do travellers associate with affective values?
 
 The preceding analysis suggests that there is significant mode dissonance along various dimensions and for various affective values. This is for the most part in line with previous research, although by examining different affective values individually instead of a summary measure of wellbeing, we are able to differentiate better in terms of how travellers respond to different affects. Less is known about the values that travellers associate with modes _other_ than the one they use. For this reason, after developing a profile of the travelers who experience mode dissonance in the preceding section, we are now interested in the responses of travellers with respect to the modes they tend to associate with various affective values. For this analysis we employ a visualization technique known as a mosaic plot. Mosaic plots are used in the exploration of multivariate categorical data [@Friendly1994mosaic; @Hofmann2000exploring], and they provide visual representations of multi-way contingency tables. The elements of the mosaic plot are called _tiles_, and the dimensions of each tile are proportional to values of variables in the underlying table. 
 
@@ -1616,7 +1623,7 @@ ggplot(data = Modes_by_Attribute %>% filter(ATTRIBUTE %in% c("FREEDOM", "ENJOYME
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-### 4.2.1 Age
+### Age
 
 There are some interesting differences when viewed from the perspective of travellers of different ages (see Figure \ref{fig:mosaic-plots-by-age}). For example, as seen above, active travel is commonly associated with freedom, happiness, and enjoyment, even by car users, but especially by users of public transportation and other modes. However, when we break this down by age, we notice that this tendency weakens as people age, and older travellers increasingly associate these affective values to the car. Furthermore, the tendency to associate status with the car tends to increase with age, with the possible exception of public transport users, for whom other options (possibly taxi), gain status for older travellers (> 54) at the expense of other modes, including the car. In contrast, the car loses in the value of luxury with age, while other options become more commonly associated with feelings of luxury for older respondents, even for car users (Figure 2). Older car users (> 54) show less dissonance in status than in luxury, while active travellers present more dissonance in status than in luxury - and in fact, they more commonly project status in the car.
 
@@ -1672,7 +1679,7 @@ ggplot(data = Modes_by_Attribute %>%
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-### 4.2.2 Education
+### Education
 
 Only two affective values were significant in the preceding analysis when seen from the perspective of education, namely luxury and status. As seen in Figure \ref{fig:mosaic-plots-by-education}, the perceptions of luxury and status are fairly consistent when differentiated by education. Most respondents tend to associate luxury and status to the use of car, albeit this association is stronger for status than for luxury. The second mode most often mentioned in relation to luxury is "other" likely due to the flexibility and convenience (but cost) of using taxis. The exception in this case is the traveller with graduate education who uses active modes. This type of respondent, while still more likely to associate luxury and status with the car, more commonly links active travel to these affects than travellers with lower levels of education. Most public transport users tend to associate luxury and status to the car, however, they associate active modes with status more than the same group with respect to luxury. 
 
@@ -1710,7 +1717,7 @@ ggplot(data = Modes_by_Attribute %>%
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-### 4.2.3 Income
+### Income
 
 Three affective values were significant in the analysis by income; perhaps not surprisingly, all three have an economic dimension. Figure \ref{fig:mosaic-plots-by-income} reflects some important social inequalities associated with the way users feel about transportation in Santiago. When the affective perception of poverty is analyzed, the image shows that generally public transport is the mode most commonly associated with poverty. There are some interesting differences, however, to be observed by income level. Whereas middle income users of public transportation associate this mode to poverty most frequently, this is not the case of high income users of public transportation, who tend to link active travel to poverty with greater frequency. Similarly, active travel is more often associated with poverty by low income travellers than middle or high income travellers. A possible explanation for this is that walking or cycling are related to the idea of a lack of financial means to access other modes of transport. For high income car users, on the other hand, public transportation may have connotations of poverty due to its massive use, whereas active travel may be seen more as a lifestyle alternative.
 
@@ -1756,7 +1763,7 @@ ggplot(data = Modes_by_Attribute %>%
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-### 4.3.4 Typical commute time
+### Typical commute time
 
 The last dimension that we examine is typical commute time. Four affective values were significant along this dimension in Table \ref{tab:cross-tabulation-results}. Figure \ref{fig:mosaic-plots-by-travel-time} shows the way travellers associate different affective values to modes of transportation by length of typical commute. The first couple of factors, freedom and enjoyment, are associated with eudaimonic and hedonic factors of wellbeing, as discussed earlier in the paper. On the other hand, the luxury and status are defined mainly by a socio-economic component. As seen in the figure, freedom and enjoyment are most frequently mentioned in relation to active travel, followed by car. However, active travel is more frequently associated with freedom and enjoyment by people who typically undertake relatively short trips (<20 min) or travellers whose typical trips are longer (>60 min). In this respect, active travel may be seen as an ideal mode for trips, and as an enviable mode by people whose trips are longer.
 
@@ -1809,7 +1816,7 @@ ggplot(data = Modes_by_Attribute %>%
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-5. Conclusions
+Conclusions
 ==========
 
 Subjective wellbeing is a topic that has attracted considerable attention in recent years due to its relationship with health. In the field of transportation, there is a large and growing body of literature that documents the way transportation can impact subjective wellbeing. Likewise, there is strong evidence that subjective wellbeing can influence travel behavior. As the world tries to move from a culture dominated by a century-long love affair with the automobile, there is a pressing need to understand how travellers perceive different modes of transportation from the lens of subjective wellbeing. Insights in this regard could prove valuable to develop and implement plans and policies to attract and retain users to healthier, more environmentally friendly transportation options, in particular active travel and public transportation. For this reason, understanding mode dissonance, the extent to which the context of travellers differs from their aspirations, is a worthwhile topic for research.

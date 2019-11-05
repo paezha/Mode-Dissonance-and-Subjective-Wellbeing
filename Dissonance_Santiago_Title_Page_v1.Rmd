@@ -14,13 +14,20 @@ address:
   - code: McMaster University
     address: School of Geography and Earth Sciences, 1280 Main St W, Hamilton, Ontario, L8S 1S4 Canada
 abstract: |
-  Subjective wellbeing is a topic that has attracted considerable attention in recent years due to the way it correlates with health. From a transportation perspective, there is a burgeoning literature on the way travel can impact subjective wellbeing, and how this, in turn, can influence behavior. After decades of fascination with the automobile, subjective wellbeing is increasingly recognized as an alternative approach to assess transportation, and to gain valuable insights to attract and retain active travelers and users of public transportation. The objective of this paper is to analyze a number of affective values associated with subjective wellbeing and the modes of transportation that people commonly use. In particular, we are interested in the potential for dissonance with respect to the primary mode of travel. The study is based on data collected from a sample of travellers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name the mode or modes that they associate with the affective values of freedom, enjoyment, happiness, poverty, luxury and status. The results indicate that users of public transportation experience the most dissonance in terms of affective values, and active travellers the least. For those travellers who experience dissonance, active travel is the mode most commonly associated with freedom, enjoyment, and happiness, public transportation is most commonly associated with poverty, and the automobil is most commonly associated with luxury and status.
+   **Introduction**  
+   Subjective wellbeing is a topic that has attracted considerable attention in recent years due to the way it correlates with health. From a transportation perspective, there is a burgeoning literature on the way travel can impact subjective wellbeing, and how this, in turn, can influence behavior.  
+   **Objective**  
+   The objective of this paper is to analyze a number of affective values associated with subjective wellbeing and the modes of transportation that people commonly use. In particular, we are interested in the potential for dissonance with respect to the primary mode of travel.  
+   **Materials and Methods**  
+   The study is based on data collected from a sample of travellers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name the mode or modes that they associate with the affective values of freedom, enjoyment, happiness, poverty, luxury and status. Analysis is based on tests of independence and visualization via mosaic plots.  
+   **Results**  
+   The results indicate that users of public transportation experience the most dissonance in terms of affective values, and active travellers the least. For those travellers who experience dissonance, active travel is the mode most commonly associated with freedom, enjoyment, and happiness, public transportation is most commonly associated with poverty, and the automobil is most commonly associated with luxury and status.
 
-journal: "An Elsevier journal"
+journal: "Journal of Transportation & Health"
 date: "`r Sys.Date()`"
 bibliography: mybibfile.bib
-#linenumbers: true
-#numbersections: true
+linenumbers: true
+numbersections: true
 csl: elsevier-harvard.csl
 output: rticles::elsevier_article
 ---
