@@ -15,19 +15,19 @@ Policy and aims: The main and most important thing to work on is answering the �
 
 Justifying the use of SWB for transport: I'm not clear about how users can be attracted (line (L)26) to public transport and active travel. would overcoming psychological taboos be enough? So general point, need to argue well for the importance of SWB around travel, in comparison to considerations of travel time, and cost - I know this is hard to do!
 
->\textcolor{blue}{The consideration of factors related to the subjective personal well-being will enable targeting public policy strategies focused on nudging public and active transport users}
+>\textcolor{blue}{Consideration of factors related to subjective wellbeing, for example, are useful for policy-makers to enhance the experience of travel, to increase satisfaction with travel, and to meet the preferences of travelers (Chatterjee et al., 2019).}
 
 Contribution of the paper to the literature: I don't think you need to number the ways the paper contributes to literature the way you have - you can just say 'Firstly,...'etc. I would actually leave most of the material under these 1,2,3 points untill later in the paper. I would include the bits of it that justify the study in the introduction but would leave the findings till later. (i.e. 'The analysis shows that the people...etc')
- 
+ 
 >\textcolor{blue}{moved comments about literature towards the section of concluding remarks; leaving some results in the introductory section}
 
 About the structure of the paper: Make the paragraph L90-94 more interesting.
 
->\textcolor{blue}{Done.}
+>\textcolor{blue}{Done. L60-63}
 
-Context: The paragraph from 179 to 189  could be better grounded in evidence – do you have any relevant references about the transport situation in Santiago de Chile? – local council or local authority documents on transport, economic, planning situations etc.
+Context: The paragraph from 179 to 189  could be better grounded in evidence – do you have any relevant references about the transport situation in Santiago de Chile? – local council or local authority documents on transport, economic, planning situations etc.
 
->\textcolor{blue}{Recent social demands have highlighted the relevance and impacts of the neoliberal economic model in the development of the city – which correlates with the construction of the society and therefore shapes the development of transport infrastructure (see for recent protests and social crisis: Davies, 2019; Guardiola-Rivera, 2019; Sehnbruch, 2019). Even though everyday mobility in Santiago has also been contextualized in relation to other Latin American cities (Avellaneda and Lazo, 2011; Rodriguez Vignoli, 2008), there is much more to be explored in other regions in the Chilean context. Measuring instruments and new methodologies have allowed a more accurate and precise understanding of the social issues arising as consequence of transport infrastructure and housing provision (Cox and Hurtubia, 2016), and the minimum provision of basic services (Tiznado-Aitken et al., 2016). However, the focus on accessibility as a measure of inequities remains predominant (Tiznado-Aitken et al., 2018; Figueroa Martínez, et al., 2018; Niehaus et al., 2016; Rojas et al., 2016).}
+>\textcolor{blue}{A tangible manifestation of the inequalities experienced by many in Chile is the large disparity in the relative cost of transportation, travel time, and distance traveled by different socio-economic segments of the population. To further complicate matters, strong spatial segregation also conditions car ownership and the use of public transportation – the higher the income, the higher the use of the automobile; conversely, the lower the income, the higher the reliance on public transportation. Although the transportation experience is but one of many dimensions of inequality, the experiences in this sector have triggered exceptional discomfort and dissatisfaction among the public. Recent social unrest, triggered by a seemingly minor hike in the fare of public transportation, has brought many of these concerns to the forefront of the public conscience in dramatic fashion (e.g., Davies, 2019). Previous research has helped to contextualize everyday mobility in Santiago relative to other Latin American cities (e.g., Avellaneda and Lazo, 2011), but much remains to be explored. Measuring instruments and new methods have led to more accurate and precise understandings of the social issues that arise as consequence of transport infrastructure and housing provision (Cox and Hurtubia, 2016), and the minimum provision of basic services (Tiznado-Aitken et al., 2016). However, the focus on accessibility as a measure of inequalities remains predominant.}
 
 Figure 1: Place figure 1 so that it is introduced in the text before the figure itself is presented. The figure could be formatted more attractively.
 
@@ -35,35 +35,35 @@ Figure 1: Place figure 1 so that it is introduced in the text before the figure 
 
 Survey description: L 200 The sections of the survey that were not used for the present study do not need to be listed.
 
->\textcolor{blue}{The study considers data from 3 out of 8 sections of a longer survey – data being more relevant for the study. The topics around these sections are Individual characteristics of respondents, feelings and emotions related to their commute, and aspects describing their regular commute trips.}
+>\textcolor{blue}{ The study considers data from 3 out of 8 sections of a longer survey. The relevant sections of the survey concern the individual characteristics of respondents, their feelings and affective responses related to their commute, and aspects describing their regular commute trips. In terms of individual characteristics and their commute, participants were asked socio-demographic information, including age (coded in three classes: younger than 35, older than 35 but younger than 55, and 55 and olde); level of education (three classes: Kindergarden to grade 12, or K-12, technical diploma or university graduate, and graduate degree), income  (three classes, by tertile), and the typical duration of the respondent’s regular commute (four classes, by duration in minutes). }
 
 Results description: In general be more precise in the case study section – for example L210 – what percentage took commutes more than 60minutes.
 
->\textcolor{blue}{The sample tends to be younger (56% is younger than 34 years old), and well-educated (68% of respondents having technical or professional education), with an almost uniform distribution of income levels. The trend in typical commute time is towards longer commutes – e.g. 55% of the trips are longer than 40 minutes, and from those 56% corresponds to trips over the 60 minutes long.}
+>\textcolor{blue}{The sample trends to younger (56% is younger than 34 years old) and well-educated respondents (68% of respondents having technical or professional education), with an almost uniform distribution of income levels. The trend in typical commute time is towards longer commutes – e.g. 55% of the trips are longer than 40 minutes, and from those 56% corresponds to trips over the 60 minutes long.}
 
 St Louis et al 2014: L157 Explain why ‘more research is needed’
 
->\textcolor{blue}{Because most literature focuses in trip satisfaction – the study goes beyond the understanding of determinants of trip satisfaction.}
+>\textcolor{blue}{Because most literature focuses in trip satisfaction. However, further research beyond the determinants of trip satisfaction is needed to understand how these socio-demographic variables connect with the affective reactions to various modes of travel (St-Louis et al., 2014).}
 
 Aggrupation of transport modes: P218 – why is motorcycle different to car? – they are both private motorised vehicles – explain the categories that you have split the modes into.
 
 >\textcolor{blue}{Car (26% of total modes – which corresponds to 91% of the total of private motorised modes), Active (9% - Walking + Bicycle), Public (60% - Metro + Bus), and Other motorised modes (6% - Taxi + Colectivo + Motorcycle).}
 
-Affective values: p.223 Why were these affective values chosen?  - needs to be explained. I would not normally think of ‘Poverty’ as a value, but rather as an economic condition, so explain the nature of these affective values.
-
->\textcolor{blue}{Words.}
+Affective values: p.223 Why were these affective values chosen?  - needs to be explained. I would not normally think of ‘Poverty’ as a value, but rather as an economic condition, so explain the nature of these affective values.
+>\textcolor{blue}{Delbosc (2012, p. 28), for instance, has summarized the most significant influences on psychological wellbeing: poverty and employment, meaningful relationships and health.}
 
 Figure 2 – again make more attractive.
 
->\textcolor{blue}{Words.}
+>\textcolor{blue}{Done.}
 
 Who experiences dissonance: L257 Why is it important to know who experiences dissonance?
 
->\textcolor{blue}{Understanding who experiences dissonance is relevant in this study. We believe most disadvantageous groups will experience more dissonance with respect to their primary travel mode and affective values, namely freedom, enjoyment, happiness, feelings of poverty, luxury, and status.}
+>\textcolor{blue}{We begin by profiling the travellers who experience dissonance. The null hypothesis is that there are no systematic differences in terms of who tends to experience affective dissonance with respect to their primary mode of travel.}
 
 Figure 3: It may be me being a bit stupid but I found the Mosaic figures hard to understand – could you explain even more clearly? I can’t see tile J or K on figure 3. However, the ensuing discussion around which groups attribute which attributes to which mode is clear and well explained, and I grasped the general concept of what you were analysing, is just the figures I am unclear on.
 
->\textcolor{blue}{Words.}
+>\textcolor{blue}{Done.}
+
 
 \newpage
 
@@ -71,19 +71,20 @@ Figure 3: It may be me being a bit stupid but I found the Mosaic figures hard to
 
 Chile and wellbeing: This paper is about subjective well-being, mode of transport, and dissonance. In the introduction, three areas are identified where this study is expected to contribute. One contribution is that the study includes data from Chile, which is a country that has not been highlighted in previous transport research. This could be further discussed. Are there any thoughts/expectations of similar or different results from studies from other parts of the world? The authors partly address this by pointing to large income gaps, a different approach to transport but also a different culture. Perhaps this can be clarified.
 
->\textcolor{blue}{As noted in our response to Reviewer 1, recent social demands have highlighted the relevance and impacts of the neoliberal economic model in the development of the city – which correlates with the construction of the society and therefore shapes the development of transport infrastructure (see for recent protests and social crisis: Davies, 2019; Guardiola-Rivera, 2019; Sehnbruch, 2019). Even though everyday mobility in Santiago has also been contextualized in relation to other Latin American cities (Avellaneda and Lazo, 2011; Rodriguez Vignoli, 2008), there is much more to be explored in other regions in the Chilean context. Measuring instruments and new methodologies have allowed a more accurate and precise understanding of the social issues arising as consequence of transport infrastructure and housing provision (Cox and Hurtubia, 2016), and the minimum provision of basic services (Tiznado-Aitken et al., 2016). However, the focus on accessibility as a measure of inequities remains predominant (Tiznado-Aitken et al., 2018; Figueroa Martínez, et al., 2018; Niehaus et al., 2016; Rojas et al., 2016).}
+>\textcolor{blue}{As noted in our response to Reviewer 1, a tangible manifestation of the inequalities experienced by many in Chile is the large disparity in the relative cost of transportation, travel time, and distance traveled by different socio-economic segments of the population. To further complicate matters, strong spatial segregation also conditions car ownership and the use of public transportation – the higher the income, the higher the use of the automobile; conversely, the lower the income, the higher the reliance on public transportation. Although the transportation experience is but one of many dimensions of inequality, the experiences in this sector have triggered exceptional discomfort and dissatisfaction among the public. Recent social unrest, triggered by a seemingly minor hike in the fare of public transportation, has brought many of these concerns to the forefront of the public conscience in dramatic fashion (e.g., Davies, 2019). Previous research has helped to contextualize everyday mobility in Santiago relative to other Latin American cities (e.g., Avellaneda and Lazo, 2011), but much remains to be explored. Measuring instruments and new methods have led to more accurate and precise understandings of the social issues that arise as consequence of transport infrastructure and housing provision (Cox and Hurtubia, 2016), and the minimum provision of basic services (Tiznado-Aitken et al., 2016). However, the focus on accessibility as a measure of inequalities remains predominant.}
+
 
 Paragraph 3 is fuzzy and can be clarified. Remove redundant information and stick to the specific contribution. Then, compare points 1, 2 and 3 with the objectives presented later in the paper (e.g., line 247). It is important that the purpose is reproduced correctly throughout the paper.
 
->\textcolor{blue}{}
+>\textcolor{blue}{ As noted in our response to Reviewer 1, we moved comments about literature towards the section of concluding remarks; leaving some results in the introductory section.}
 
 Relation of studies in the literature: The introduction provides a background to why subjective well-being is a relevant area to study. The authors highlight relevant references and show current knowledge within the field. However, different concepts are used and it is not always clear what is meant and how the different studies relate to each other. It is unclear whether previous studies focused on satisfaction, affective values, perceptions in general, or attitudes.
 
->\textcolor{blue}{}
+>\textcolor{blue}{We differenced studies which are purely focused on satisfaction and subjective wellbeing. Affective values and perceptions are considered in more general approaches (Zorrilla et al, 2019). We mentioned attitudes for the case of Asian cities (Shao et al, 2019).}
 
 Aims: This confusion also related to the aim of this specific paper, will it focus on affect or affective values (which may be something else?).
 
->\textcolor{blue}{}
+>\textcolor{blue}{Affective values – as we mentioned by the end of paragraph 3.}
 
 Attitudes and satisfaction: Also in the introduction attitudes was mentioned as an important variable to study. It is also unclear why studies that focused on "life satisfaction" is discussed since this is not the focus of this study
 
@@ -91,7 +92,7 @@ Attitudes and satisfaction: Also in the introduction attitudes was mentioned as 
 
 Dissonance: I also think dissonance, which is an important concept in this study, is not discussed in the background.
 
->\textcolor{blue}{This has been discussed in section 3.2. paragraph 4.}
+>\textcolor{blue}{This has been discussed in the Introduction section.}
 
 Taken together, the introduction needs clarification when it comes to previous studies, the aim of this specific study and the contribution to existing knowledge. 
 
@@ -103,11 +104,12 @@ Although the authors highlight tools from transport research to capture well-bei
 
 Developing and developed countries: In a concluding section, you choose to discuss the need for this type of research in developing countries. This could advantageously be a separate section where more clearly discusses and justifies any differences between developing and developed countries.
 
->\textcolor{blue}{This has been also commented in the Background section: “The research needs already recognized in the developed world are also markedly acute in the context of the Global South, where historical inequality has tended to create a symbolic attachment to the automobile, in addition to negative connotations for public transport and active travel”. A separated paragraph in the conclusion addresses this discussion, in the Chilean and LA context.}
+>\textcolor{blue}{This has been also commented in the Background section: “The research needs outlined above are well-recognized in the developed world, but there is still a dearth
+of research in the context of the Global South. Historical inequality in many developing countries has led to strong symbolic attachments to the automobile, in addition to negative connotations for public transport and active travel (Zorrilla et al., 2019)”. A separated paragraph in the conclusion addresses this discussion, in the Chilean and LA context.}
 
 Method: The data collection procedure is not described.
 
->\textcolor{blue}{The data collection considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. The survey was carried out face-to-face in centres of activity with dense provision of offices, services and educational centres.}
+>\textcolor{blue}{The survey collected information on a wide range of transportation and related issues, and the data collection protocol considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. The survey was carried out face-to-face in centres of activity with dense provision of offices, services, and educational centres. An equal representation of both genders and a representation of the proportion of inhabitants per area were chosen as relevant characteristics of the sample. In total, there were n = 451 valid responses, although not every response was complete and some questions have missing values.}
 
 Separate results and analysis: I recommend separating results reporting and discussion/analysis to clarify what has been found.
 
@@ -119,7 +121,7 @@ Figures 3, 4 and 7: The mosaic plot is however not helpful. Please consider othe
 
 Table 1: The tables are hard to interpret. I recommend to replace figure 1 with a table. Please be clear with the labels (for instance K-12 it unknown to me). If possible, add mean value and standard deviation to the table. This table should be in section 3.2.
 
->\textcolor{blue}{Words.}
+>\textcolor{blue}{We think figure 1 is good for visualizing the descriptive statistics. Labels are clear now.}
 
 The discussion is good although I miss a part on how this knowledge can help develop the alternatives and make them more attractive.
 
@@ -131,11 +133,7 @@ The discussion is good although I miss a part on how this knowledge can help dev
 
 This paper is interesting as it details mode dissonance in terms of five affective values. The analysis method using visualization (through mosaic plots) is unique and suitable to the kind of data collected. Overall, the paper is structured very well.
 
->\textcolor{blue}{Words.}
-
-SWB and health: The author(s) could at least add a paragraph about how SWB affects health, except for just mentioning that SWB has been found to be correlated with health.
-
->\textcolor{blue}{Words.}
+>\textcolor{blue}{Thanks.}
 
 Election of affective values: Second, the author(s) could make it clear how these affective values such as freedom, enjoyment, luxury and other are related to SWB. The connection is not quite clear in the first two sections.
 
@@ -143,7 +141,7 @@ Election of affective values: Second, the author(s) could make it clear how thes
 
 Pg 6, L196-198: How were different areas divided?
 
->\textcolor{blue}{The data collection considered a quota-sampling method for gathering the information, considering the socio-demographic information from Pre-Census of 2012. The survey was carried out face-to-face in centres of activity with dense provision of offices, services and educational centres.}
+>\textcolor{blue}{See response to reviewer 2 about methodology.}
 
 Pg 217-218: Taxi, colectivo and motorcycle are grouped as same. I find that the affective evaluations of motorcycle users could be different than those made by users of the other two modes. It would be better if the author(s) could explain it or mention it in some part of their limitations.
 
@@ -151,9 +149,8 @@ Pg 217-218: Taxi, colectivo and motorcycle are grouped as same. I find that the 
 
 Figure 4: NA is shown in the legend but not in the figure. The x-axis labels are overlapped. I understand this might be due to low values.
 
->\textcolor{blue}{Words.}
+>\textcolor{blue}{Done.}
 
 Figure 7: Same as Figure 4. Is there any alternative way to make it better?
 
->\textcolor{blue}{Words.}
-
+>\textcolor{blue}{Done.}
