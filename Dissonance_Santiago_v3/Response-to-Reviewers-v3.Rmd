@@ -1,0 +1,90 @@
+---
+title: "Response to Reviewers"
+output: pdf_document
+---
+
+We would like to thank the editor and three anonymous reviewers for their thoughtful comments and suggestions for revisions. We believe that the paper has been substantially improved by their input and we hope that they will find this version to fully address all their comments. In this letter we respond to the feedback received, and describe the actions taken to revise the paper.
+
+\newpage
+
+# Reviewer 1
+
+You have helpfully structured your responses to the initial review, so your actions relating to this review can be seen. I am not entirely satisfied with some of your responses. For instance whilst Figures 1 and 2 may have been improved, they still look fairly 'amateur'. Also I am not fully satisfied that the explanation of how affective values were chosen has been substantially and explicitly acted upon. However, on my first review I considered this a good paper needing iterative improvements. I feel such improvements have been made. It is a well written paper, and better than it was, with a strong and clear narrative, an interesting topic, and detailed and extensive findings. I therefore recommend it be published.
+
+>\textcolor{blue}{Thank you very much for your suggestions to improve the paper and for endorsing it for publication.}
+
+\newpage
+
+# Reviewer 2
+
+The manuscript has been improved. It is now easier to follow the arguments and the different choices that the authors make in method, design, and analysis. I have a few minor comments.
+
+>\textcolor{blue}{Thank you again for your suggestions to improve the paper and for endorsing it for publication.}
+
+K-12 is still not explained (Figure 1). I do not know what it stands for.
+
+>\textcolor{blue}{This is now explained in section 3.2, where we note that there are three levels of education, one of which is Kindergarten to grade 12, or K-12.}
+
+Paragraph 3 is fuzzy and can be clarified. Remove redundant information and stick to the specific contribution. Then, compare points 1, 2 and 3 with the objectives presented later in the paper (e.g., line 247). It is important that the purpose is reproduced correctly throughout the paper.
+
+>\textcolor{blue}{As noted in our response to Reviewer 1, we moved comments about literature towards the section of concluding remarks; leaving some results in the introductory section.}
+
+Line 102 and 142. It is not common to write out the full name in references. "Cecilia" used in the reference Cecilia Jakobsson Bergstad et al., 2011 is her first name. "Cecilia" should be removed.
+
+>\textcolor{blue}{True. We have modified that now.}
+
+Line 105 and 147. Replace C. J. Bergstad et al., 2011 with Jakobsson Bergstad et al., 2011
+
+>\textcolor{blue}{Done.}
+
+Line 106/107. Remove " but see…"
+
+>\textcolor{blue}{Done.}
+
+Line 156/157. Replace bold text with normal text
+
+>\textcolor{blue}{Done.}
+
+Line 156. Replace Olson with Olsson
+
+>\textcolor{blue}{Done.}
+
+Line 273. significant at better than" remove "at"
+
+>\textcolor{blue}{Done.}
+
+Line 277. "In the case…" replace with "In this case"
+
+>\textcolor{blue}{Done.}
+
+Line 331. "…differences at better than 10%" remove "at"
+
+>\textcolor{blue}{Done.}
+
+Line 381. Misspelling of "Transportatoin"
+
+>\textcolor{blue}{Done.}
+
+Line 390. "Whereas" replace "W" with a lower-case "w" (don’t find that correct)
+
+>\textcolor{blue}{Done.}
+
+Reading difficulties in figure 3, 4 and 7. Check travel mode.
+
+>\textcolor{blue}{We recreated this figures to remove some cluttering, hopefully increasing their readability.}
+
+Please use upper-cases (e.g. line 391) or lower-cases (e.g., 409) for affective values throughout the manuscript.
+
+>\textcolor{blue}{We have revised the manuscript to use upper case consistently.}
+
+Line 514/515. Please check the sentence: "Luxury and status, on the other hand, are more frequently associated to luxury and status."
+
+>\textcolor{blue}{Corrected.}
+
+\newpage
+
+# Reviewer 3
+
+The authors have addressed my concerns and the paper looks strong. Hence, I recommend it for publication.
+
+>\textcolor{blue}{Thank you again for your useful feedback and for endorsing the paper for publication.}

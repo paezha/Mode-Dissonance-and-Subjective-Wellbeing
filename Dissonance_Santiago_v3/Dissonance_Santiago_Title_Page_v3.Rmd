@@ -1,0 +1,33 @@
+---
+title: Do Drivers Dream of Walking? An Investigation of Travel Mode Dissonance from the Perspective of Subjective Wellbeing
+author:
+  - name: Beatriz Mella Lira
+    email: beatriz.lira.14@ucl.ac.uk
+    affiliation: PUC
+    footnote: Corresponding Author
+  - name: Antonio Paez
+    email: paezha@mcmaster.ca
+    affiliation: McMaster University
+address:
+  - code: PUC
+    address: BRT+ Centre of Excellence, Departamento Ingeniería de Transporte y Logística, Escuela de Ingeniería, Pontificia Universidad Católica de Chile
+  - code: McMaster University
+    address: School of Earth, Environment, and Society, McMaster University, 1280 Main St W, Hamilton, Ontario, L8S 1S4 Canada
+abstract: |
+   *Introduction*  
+   Subjective wellbeing is a topic that has attracted considerable attention in the transportation literature in recent years. As a result, there is a burgeoning literature that investigates the impacts of travel on subjective wellbeing, and how wellbeing, in turn, can influence behavior. An important aspect of subjective wellbeing are the affective reactions of people to their experiences.   
+   *Objective*  
+   The objective of this paper is to analyze the affective reactions of travelers with respect to various modes of transportation. In particular, we are interested in the potential for dissonance between primary mode of travel and the mode(s) of travel identified as evoking various affective reactions.  
+   *Materials and Methods*  
+   The study is based on data collected from a sample of travelers in the city of Santiago, in Chile. Participants in the study were asked about their usual mode of travel, and then were asked to name their ideal mode(s) of transportation from the perspective of various affective reactions. The reactions we investigate are associated with the values of Freedom, Enjoyment, Happiness, Poverty, Luxury, and Status. Analysis is based on tests of independence and visualization techniques.  
+   *Results*  
+   The results indicate that users of public transportation experience the most dissonance in terms of affective reactions, and active travelers the least. For those travelers who experience dissonance, active travel is the mode most commonly associated with Freedom, Enjoyment, and Happiness, while public transportation is most commonly associated with Poverty. The automobile, in contrast, is the mode most commonly associated with Luxury and Status.
+
+journal: "Journal of Transportation & Health"
+date: "`r Sys.Date()`"
+bibliography: mybibfile.bib
+linenumbers: true
+numbersections: true
+csl: elsevier-harvard.csl
+output: rticles::elsevier_article
+---
