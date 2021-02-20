@@ -62,6 +62,15 @@ library(sf)
 library(tidyverse)
 ```
 
+```{r install-data-package, include=FALSE}
+# Run only once if needed
+devtools::install_github("paezha/Mode-Dissonance-and-Subjective-Wellbeing", subdir = "ModeDissonanceSantiago")
+```
+
+```{r}
+library(ModeDissonanceSantiago)
+```
+
 ```{r load-data, include=FALSE}
 
 # To run this notebook, the file `Dissonance_Santiago.RData` is needed. This file contains the following object:
@@ -130,7 +139,7 @@ library(tidyverse)
 
 # Read the RData file:
 
-load("Dissonance_Santiago.RData")
+#load("Dissonance_Santiago.RData")
 ```
 
 ```{r data-preparation, include=FALSE}
@@ -831,7 +840,7 @@ Our research is based on data collected from a sample of travelers in the city o
 
 After these introductory remarks, the paper follows up with a review of the literature on the topics of subjective wellbeing and affective values. Next, we discuss the case study, as well as the methodology and data used for this research. The analysis and results of the study are presented afterwards, before concluding with some discussion and directions for future research and policy.
 
-Please note that this document  was prepared using R Markdown and is an example of reproducible research [@Brunsdon2020opening]. The R Markdown file, along with the data file needed to reproduce the analysis, are available for download\footnote{\url{https://drive.google.com/open?id=189ZvfVvRis5xZA9IlviKCLW2bwbPJAgg}}.
+Please note that this document  was prepared using R Markdown and is an example of reproducible research [@Brunsdon2020opening]. The R Markdown file, along with the data file needed to reproduce the analysis, are available for download\footnote{\url{https://github.com/paezha/Mode-Dissonance-and-Subjective-Wellbeing}}.
 
 Background
 ===================
