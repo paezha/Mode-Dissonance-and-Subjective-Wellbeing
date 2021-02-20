@@ -68,10 +68,10 @@ library(tidyverse)
 
 ```{r install-data-package, include=FALSE}
 # Run only once if needed
-devtools::install_github("paezha/Mode-Dissonance-and-Subjective-Wellbeing", subdir = "ModeDissonanceSantiago")
+#devtools::install_github("paezha/Mode-Dissonance-and-Subjective-Wellbeing", subdir = "ModeDissonanceSantiago")
 ```
 
-```{r}
+```{r load-data-package, include=FALSE}
 library(ModeDissonanceSantiago)
 ```
 
@@ -1564,7 +1564,7 @@ Turning now to typical commute time, four affective values show significant diff
 
 ```{r table-cross-tabulation-results-with-instrumental, echo = FALSE, eval=FALSE}
 kable(xtab_results,
-      "latex",
+      "html",
       digits = 2,
       booktabs = TRUE,
       caption = "\\label{tab:cross-tabulation-results-with-instrumental}Percentage of respondents who report mode dissonance with respect to various SWB and instrumental factors",
@@ -1589,7 +1589,7 @@ kable(xtab_results,
 
 ```{r table-cross-tabulation-results-without-instrumental, echo = FALSE}
 kable(xtab_results,
-      "latex",
+      "html",
       digits = 2,
       booktabs = TRUE,
       caption = "\\label{tab:cross-tabulation-results}Percentage of respondents who report mode dissonance with respect to various affective values",

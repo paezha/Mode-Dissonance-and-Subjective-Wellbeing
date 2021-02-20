@@ -61,12 +61,6 @@ associated with Luxury and Status.
   - Survey  
   - Data analysis
 
-<!-- end list -->
-
-``` r
-library(ModeDissonanceSantiago)
-```
-
 # Introduction
 
 Transportation planning for decades has focused on providing mobility
@@ -515,6 +509,1119 @@ findings: both St-Louis et al. (2014) and Smith (2017) report that
 commute satisfaction tends to decline with longer commutes, and Handy
 and Thigpen (2019) found that commute distance was a negative covariate
 of commute satisfaction.
+
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+
+<caption>
+
+Percentage of respondents who report mode dissonance with respect to
+various affective values
+
+</caption>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Variable
+
+</th>
+
+<th style="text-align:center;">
+
+Freedom
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+<th style="text-align:center;">
+
+Enjoyment
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+<th style="text-align:center;">
+
+Happiness
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+<th style="text-align:center;">
+
+Poverty
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+<th style="text-align:center;">
+
+Luxury
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+<th style="text-align:center;">
+
+Status
+
+</th>
+
+<th style="text-align:center;">
+
+\(\chi^2\) p-val
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr grouplength="3">
+
+<td colspan="13" style="border-bottom: 1px solid;">
+
+<strong>Age</strong>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+\< 35
+
+</td>
+
+<td style="text-align:center;">
+
+89.88
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+94.33
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+93.52
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+87.63
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.4095
+
+</td>
+
+<td style="text-align:center;">
+
+89.43
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+87.17
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+\(&lt;0.001\)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+35 - 54
+
+</td>
+
+<td style="text-align:center;">
+
+74.22
+
+</td>
+
+<td style="text-align:center;">
+
+81.45
+
+</td>
+
+<td style="text-align:center;">
+
+82.26
+
+</td>
+
+<td style="text-align:center;">
+
+87.38
+
+</td>
+
+<td style="text-align:center;">
+
+70.18
+
+</td>
+
+<td style="text-align:center;">
+
+68.70
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+\> 54
+
+</td>
+
+<td style="text-align:center;">
+
+74.00
+
+</td>
+
+<td style="text-align:center;">
+
+72.92
+
+</td>
+
+<td style="text-align:center;">
+
+68.75
+
+</td>
+
+<td style="text-align:center;">
+
+76.19
+
+</td>
+
+<td style="text-align:center;">
+
+78.57
+
+</td>
+
+<td style="text-align:center;">
+
+66.67
+
+</td>
+
+</tr>
+
+<tr grouplength="3">
+
+<td colspan="13" style="border-bottom: 1px solid;">
+
+<strong>Education</strong>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+K-12
+
+</td>
+
+<td style="text-align:center;">
+
+85.98
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.9063
+
+</td>
+
+<td style="text-align:center;">
+
+92.16
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.7005
+
+</td>
+
+<td style="text-align:center;">
+
+89.22
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.9694
+
+</td>
+
+<td style="text-align:center;">
+
+79.27
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.3608
+
+</td>
+
+<td style="text-align:center;">
+
+95.10
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.0058
+
+</td>
+
+<td style="text-align:center;">
+
+92.39
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.013
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Tech/Univ
+
+</td>
+
+<td style="text-align:center;">
+
+83.00
+
+</td>
+
+<td style="text-align:center;">
+
+86.94
+
+</td>
+
+<td style="text-align:center;">
+
+86.94
+
+</td>
+
+<td style="text-align:center;">
+
+88.51
+
+</td>
+
+<td style="text-align:center;">
+
+78.99
+
+</td>
+
+<td style="text-align:center;">
+
+75.00
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Graduate
+
+</td>
+
+<td style="text-align:center;">
+
+78.57
+
+</td>
+
+<td style="text-align:center;">
+
+85.19
+
+</td>
+
+<td style="text-align:center;">
+
+84.62
+
+</td>
+
+<td style="text-align:center;">
+
+86.36
+
+</td>
+
+<td style="text-align:center;">
+
+76.00
+
+</td>
+
+<td style="text-align:center;">
+
+79.17
+
+</td>
+
+</tr>
+
+<tr grouplength="3">
+
+<td colspan="13" style="border-bottom: 1px solid;">
+
+<strong>Income</strong>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Low
+
+</td>
+
+<td style="text-align:center;">
+
+86.51
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.5755
+
+</td>
+
+<td style="text-align:center;">
+
+82.11
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.2264
+
+</td>
+
+<td style="text-align:center;">
+
+88.62
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.9698
+
+</td>
+
+<td style="text-align:center;">
+
+80.19
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.0642
+
+</td>
+
+<td style="text-align:center;">
+
+88.71
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.0204
+
+</td>
+
+<td style="text-align:center;">
+
+88.70
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+
+0.0137
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Middle
+
+</td>
+
+<td style="text-align:center;">
+
+84.52
+
+</td>
+
+<td style="text-align:center;">
+
+89.80
+
+</td>
+
+<td style="text-align:center;">
+
+88.00
+
+</td>
+
+<td style="text-align:center;">
+
+83.76
+
+</td>
+
+<td style="text-align:center;">
+
+85.82
+
+</td>
+
+<td style="text-align:center;">
+
+80.00
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+High
+
+</td>
+
+<td style="text-align:center;">
+
+79.19
+
+</td>
+
+<td style="text-align:center;">
+
+90.97
+
+</td>
+
+<td style="text-align:center;">
+
+85.82
+
+</td>
+
+<td style="text-align:center;">
+
+93.69
+
+</td>
+
+<td style="text-align:center;">
+
+73.68
+
+</td>
+
+<td style="text-align:center;">
+
+70.31
+
+</td>
+
+</tr>
+
+<tr grouplength="4">
+
+<td colspan="13" style="border-bottom: 1px solid;">
+
+<strong>Mode</strong>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Car
+
+</td>
+
+<td style="text-align:center;">
+
+58.93
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt; 0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+78.90
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+70.91
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+97.96
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.0045
+
+</td>
+
+<td style="text-align:center;">
+
+41.00
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+30.69
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt;0.001\)
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Active
+
+</td>
+
+<td style="text-align:center;">
+
+46.34
+
+</td>
+
+<td style="text-align:center;">
+
+60.98
+
+</td>
+
+<td style="text-align:center;">
+
+57.89
+
+</td>
+
+<td style="text-align:center;">
+
+75.76
+
+</td>
+
+<td style="text-align:center;">
+
+89.47
+
+</td>
+
+<td style="text-align:center;">
+
+81.82
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Public
+
+</td>
+
+<td style="text-align:center;">
+
+99.23
+
+</td>
+
+<td style="text-align:center;">
+
+96.76
+
+</td>
+
+<td style="text-align:center;">
+
+98.80
+
+</td>
+
+<td style="text-align:center;">
+
+81.35
+
+</td>
+
+<td style="text-align:center;">
+
+100.00
+
+</td>
+
+<td style="text-align:center;">
+
+99.57
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+Other
+
+</td>
+
+<td style="text-align:center;">
+
+91.30
+
+</td>
+
+<td style="text-align:center;">
+
+86.96
+
+</td>
+
+<td style="text-align:center;">
+
+91.30
+
+</td>
+
+<td style="text-align:center;">
+
+93.33
+
+</td>
+
+<td style="text-align:center;">
+
+72.73
+
+</td>
+
+<td style="text-align:center;">
+
+90.00
+
+</td>
+
+</tr>
+
+<tr grouplength="4">
+
+<td colspan="13" style="border-bottom: 1px solid;">
+
+<strong>Commute Time</strong>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+\< 20 min
+
+</td>
+
+<td style="text-align:center;">
+
+65.93
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+\(&lt;0.001\)
+
+</td>
+
+<td style="text-align:center;">
+
+82.95
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.6115
+
+</td>
+
+<td style="text-align:center;">
+
+77.27
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.0394
+
+</td>
+
+<td style="text-align:center;">
+
+86.11
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.9225
+
+</td>
+
+<td style="text-align:center;">
+
+73.49
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.0925
+
+</td>
+
+<td style="text-align:center;">
+
+67.09
+
+</td>
+
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+
+0.0158
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+20 - 40 min
+
+</td>
+
+<td style="text-align:center;">
+
+85.86
+
+</td>
+
+<td style="text-align:center;">
+
+87.50
+
+</td>
+
+<td style="text-align:center;">
+
+89.58
+
+</td>
+
+<td style="text-align:center;">
+
+90.41
+
+</td>
+
+<td style="text-align:center;">
+
+83.87
+
+</td>
+
+<td style="text-align:center;">
+
+81.18
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+40 - 60 min
+
+</td>
+
+<td style="text-align:center;">
+
+83.04
+
+</td>
+
+<td style="text-align:center;">
+
+89.91
+
+</td>
+
+<td style="text-align:center;">
+
+89.62
+
+</td>
+
+<td style="text-align:center;">
+
+86.08
+
+</td>
+
+<td style="text-align:center;">
+
+82.35
+
+</td>
+
+<td style="text-align:center;">
+
+77.78
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+
+\> 60 min
+
+</td>
+
+<td style="text-align:center;">
+
+95.93
+
+</td>
+
+<td style="text-align:center;">
+
+92.17
+
+</td>
+
+<td style="text-align:center;">
+
+93.28
+
+</td>
+
+<td style="text-align:center;">
+
+83.02
+
+</td>
+
+<td style="text-align:center;">
+
+91.15
+
+</td>
+
+<td style="text-align:center;">
+
+90.09
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ## Which modes do travelers associate with affective values?
 

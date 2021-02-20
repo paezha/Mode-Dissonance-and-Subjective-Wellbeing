@@ -64,10 +64,10 @@ library(tidyverse)
 
 ```{r install-data-package, include=FALSE}
 # Run only once if needed
-devtools::install_github("paezha/Mode-Dissonance-and-Subjective-Wellbeing", subdir = "ModeDissonanceSantiago")
+#devtools::install_github("paezha/Mode-Dissonance-and-Subjective-Wellbeing", subdir = "ModeDissonanceSantiago")
 ```
 
-```{r}
+```{r load-data-package, include=FALSE}
 library(ModeDissonanceSantiago)
 ```
 
@@ -166,7 +166,7 @@ library(ModeDissonanceSantiago)
 
 # First, select the variables needed from the master table, and code dissonance as 1 (no dissonance) or two (dissonance):
 
-Overall_dissonance <- master %>%
+Overall_dissonance <- Dissonance_Santiago %>%
   transmute(USED, 
             FREEDOM_DISSONANCE = ifelse(USED == FREEDOM, 1, 2),
             ENJOYMENT_DISSONANCE = ifelse(USED == ENJOYMENT, 1, 2),
@@ -223,7 +223,7 @@ Overall_dissonance <- Overall_dissonance %>%
 
 # First, split the responses regarding the modes associated with each attribute, so that we can record each mode selected individually:
 
-Modes_by_Attribute <- master %>% 
+Modes_by_Attribute <- Dissonance_Santiago %>% 
   mutate(FREEDOM = strsplit(as.character(FREEDOM), ""),
          ENJOYMENT = strsplit(as.character(ENJOYMENT), ""),
          HAPPINESS = strsplit(as.character(HAPPINESS), ""),
@@ -912,7 +912,7 @@ grid.arrange(age_plot, education_plot, income_plot, time_plot)
 In addition, respondents were asked about their primary mode of travel for their regular commute. The modes available were Car; Taxi; _Colectivo_ (a form of shared ride, intermediate in flexibility and capacity between taxi and bus); Motorcycle; Metro; Bus; Bicycle; and Walking. As seen in the top panel of Figure \ref{fig:primary-mode-travel}, the three most common modes of travel are Metro, Bus, and Car, followed by Walking and Bicycle. For the analysis, we aggregate these modes into the following categories (bottom panel of Figure \ref{fig:primary-mode-travel}): (26% of total modes – which corresponds to 91% of the total of private motorized modes), Active (9% - Walking + Bicycle), Public (60% - Metro + Bus), and Other motorized modes (6% - Taxi + Colectivo + Motorcycle).  
 
 ```{r figure-primary-mode-travel, fig.width= 4, fig.height=6, echo=FALSE, cache = TRUE,  fig.cap="\\label{fig:primary-mode-travel}Frequency of primary mode used for regular commute; top panel: all modes, bottom panel: aggregated modes"}
-mode_plot1 <- ggplot(data = master, aes(x = factor(USED, levels = c("A", "G", "H", "E", "F", "B", "C", "D"),
+mode_plot1 <- ggplot(data = Dissonance_Santiago, aes(x = factor(USED, levels = c("A", "G", "H", "E", "F", "B", "C", "D"),
                                                    labels = c("Car", "Bicycle", "Walk", "Metro", "Bus", "Taxi", "Colectivo", "Motorcycle")),
                                         fill = USED)) +
   geom_bar() +
