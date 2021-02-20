@@ -7,8 +7,8 @@
 
 <!-- badges: end -->
 
-Beatriz Mella Lira (Pontificia Universidad Católica de Chile) Antonio
-Paez (McMaster University)
+Beatriz Mella Lira (Pontificia Universidad Católica de Chile)  
+Antonio Paez (McMaster University)
 
 Journal of Transport and Health (2021), <https://doi.org/xx.xxx>
 
