@@ -10,7 +10,8 @@
 Beatriz Mella Lira (Pontificia Universidad Católica de Chile)  
 Antonio Paez (McMaster University)
 
-Journal of Transport and Health (2021), <https://doi.org/xx.xxx>
+Journal of Transport and Health (2021) Vol. 20:101015,
+<https://doi.org/10.1016/j.jth.2021.101015>
 
 ## Abstract
 
